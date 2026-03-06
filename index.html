@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boss Meter</title>
+  <meta name="description" content="Discover your inner boss energy" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7548877721858943"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="page">
+    <div class="wrap">
+      <section class="card" aria-labelledby="title">
+        
+        <div class="cornerActions" aria-label="Top actions">
+          <button class="cornerBtn" id="historyBtn" type="button" aria-label="Open history">History</button>
+        <button class="cornerBtn" id="shareBtn" type="button" aria-label="Share site link">Share</button>
+          </div>
+<header class="header">
+          <div class="logo" aria-hidden="true">
+            <svg class="icon icon--white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7l4 6 5-7 5 7 4-6v13H3V7z"></path>
+              <path d="M3 20h18"></path>
+            </svg>
+          </div>
+          <h1 id="title" class="title">Boss Meter</h1>
+          <p class="subtitle">Discover your inner boss energy</p>
+        </header>
+
+        <div class="resultArea" id="resultArea">
+          <div class="placeholder" id="placeholder">
+            <span class="placeholderText" id="placeholderText">Press the button to check</span>
+          </div>
+
+          <div class="result hidden" id="result" aria-live="polite">
+            <img class="bossImage hidden" id="bossImage" alt="" />
+            <div class="resultNumber" id="resultNumber">—</div>
+            <div class="resultTier" id="resultTier">—</div>
+            <div class="resultIcon" id="resultIcon" aria-hidden="true"></div>
+          
+            <div class="progressBlock hidden" id="progressBlock" aria-label="Progress">
+              <div class="progressValue" id="progressValue">0</div>
+              <div class="progressTrack" aria-hidden="true">
+                <div class="progressFill" id="progressFill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="checkBtn" id="checkBtn" type="button">
+          <span class="btnInner">
+            <span class="btnIcon" id="btnIcon" aria-hidden="true"></span>
+            <span class="btnText" id="btnText">Check My Boss Level</span>
+          </span>
+        </button>
+
+        <section class="tiers" aria-label="Boss tiers">
+          <p class="tiersLabel">BOSS TIERS</p>
+          <div class="tierGrid">
+            <div class="tierBox">
+              <div class="tierRange tierRange--gray">1-29</div>
+              <div class="tierName">Novice</div>
+            </div>
+            <div class="tierBox">
+              <div class="tierRange tierRange--green">30-49</div>
+              <div class="tierName">Apprentice</div>
+            </div>
+            <div class="tierBox">
+              <div class="tierRange tierRange--blue">50-69</div>
+              <div class="tierName">Rising</div>
+            </div>
+            <div class="tierBox">
+              <div class="tierRange tierRange--purple">70-89</div>
+              <div class="tierName">Elite</div>
+            </div>
+            <div class="tierBox">
+              <div class="tierRange tierRange--yellow">90-100</div>
+              <div class="tierName">Legendary</div>
+            </div>
+          </div>
+        </section>
+        <div class="historyModal hidden" id="historyModal" role="dialog" aria-modal="true" aria-label="Boss history">
+          <div class="historyCard">
+            <div class="historyHeader">
+              <div class="historyTitle">Boss History</div>
+              <button class="historyClose" id="historyClose" type="button" aria-label="Close history">✕</button>
+            </div>
+            <div class="historySub">Last boss results</div>
+            <div class="historyList" id="historyList" aria-label="History list"></div>
+          </div>
+        </div>
+
+
+        <div class="shareModal hidden" id="shareModal" role="dialog" aria-modal="true" aria-label="Share options">
+          <div class="shareCard">
+            <div class="shareHeader">
+              <div class="shareTitle">Share</div>
+              <button class="shareClose" id="shareClose" type="button" aria-label="Close share">✕</button>
+            </div>
+            <div class="shareSub">Choose what to share</div>
+            <div class="shareActions">
+              <button class="shareOptionBtn hidden" id="shareBossScoreBtn" type="button">Boss score</button>
+              <button class="shareOptionBtn" id="shareSiteLinkBtn" type="button">Site link</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="footerArea">
+        <a class="checkBtn checkBtn--thin" id="toAdsBtn" href="./commercials.html">
+          <span class="btnInner">
+            <span class="btnText">Boss Commercials</span>
+          </span>
+        </a>
+
+        <div class="fineLinks">
+  <a class="fineLink" href="./about.html">About</a> ·
+  <a class="fineLink" href="./contact.html">Contact</a> ·
+
+          <a class="fineLink" href="./privacy.html">Privacy Policy</a>
+        </div>
+       <p style="text-align:center; color: rgba(148,163,184,0.65); font-size:12px; margin-top:10px;">
+  © 2026 Boss Meter. All rights reserved.
+</p>
+
+      </div>
+    </div>
+     </main>
+
+  <script src="./script.js"></script>
+
+  <div class="cookieBanner hidden" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div class="cookieCard">
+      <div class="cookieText">
+        We use cookies to show ads and measure performance.
+        <a class="cookieLink" href="./privacy.html">Privacy Policy</a>
+      </div>
+      <div class="cookieActions">
+        <button class="cookieBtn cookieBtn--ghost" id="cookieDecline" type="button">Decline</button>
+        <button class="cookieBtn" id="cookieAccept" type="button">Accept</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

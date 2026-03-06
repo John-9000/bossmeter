@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shared Boss Score</title>
+  <meta name="description" content="Shared boss score" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page" id="sharedScoreRoot">
+    <div class="wrap">
+      <section class="card" aria-label="Shared score card">
+        <header class="header">
+          <h1 class="title">Shared Boss Score</h1>
+          <p class="subtitle">Someone shared a boss roll</p>
+        </header>
+
+        <div class="resultArea">
+          <div class="result" id="result" aria-live="polite">
+            <div class="resultNumber" id="resultNumber">—</div>
+            <div class="resultTier" id="resultTier">—</div>
+            <div class="resultIcon" id="resultIcon" aria-hidden="true"></div>
+            <div class="sharedLabel" id="sharedLabel">( Shared score )</div>
+          </div>
+        </div>
+
+        <button class="checkBtn" id="sharedToMainBtn" type="button">
+          <span class="btnInner">
+            <span class="btnText">Check My Boss Level</span>
+          </span>
+        </button>
+      </section>
+
+      <div class="fineLinks">
+        <a class="fineLink" href="./about.html">About</a> ·
+        <a class="fineLink" href="./contact.html">Contact</a> ·
+        <a class="fineLink" href="./privacy.html">Privacy Policy</a>
+      </div>
+      <p style="text-align:center; color: rgba(148,163,184,0.65); font-size:12px; margin-top:10px;">
+  © 2026 Boss Meter. All rights reserved.
+</p>
+    </div>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
+
+
