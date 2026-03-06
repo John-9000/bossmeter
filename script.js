@@ -19,7 +19,7 @@ function rollBossLinearWeights() {
   return 100;
 }
 
-const BASE_URL = "https://www.bossdeboss.co.uk";
+const BASE_URL = "https://bossmeter.app";
 // --- Signed score sharing (client-side signature) ---
 // Note: this is an integrity check, not a secret (the key ships to clients).
 const SIGNING_SECRET = "bossdeboss-score-v1";
