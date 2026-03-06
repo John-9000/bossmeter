@@ -16,8 +16,9 @@
         
         <div class="cornerActions" aria-label="Top actions">
           <button class="cornerBtn" id="historyBtn" type="button" aria-label="Open history">History</button>
-        <button class="cornerBtn" id="shareBtn" type="button" aria-label="Share site link">Share</button>
-          </div>
+          <button class="cornerBtn" id="shareBtn" type="button" aria-label="Share site link">Share</button>
+        </div>
+
 <header class="header">
           <div class="logo" aria-hidden="true">
             <svg class="icon icon--white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -28,7 +29,7 @@
           </div>
           <h1 id="title" class="title">Boss Meter</h1>
           <p class="subtitle">Discover your inner boss energy</p>
-        </header>
+</header>
 
         <div class="resultArea" id="resultArea">
           <div class="placeholder" id="placeholder">
@@ -82,68 +83,33 @@
             </div>
           </div>
         </section>
-        <div class="historyModal hidden" id="historyModal" role="dialog" aria-modal="true" aria-label="Boss history">
-          <div class="historyCard">
-            <div class="historyHeader">
-              <div class="historyTitle">Boss History</div>
-              <button class="historyClose" id="historyClose" type="button" aria-label="Close history">✕</button>
-            </div>
-            <div class="historySub">Last boss results</div>
-            <div class="historyList" id="historyList" aria-label="History list"></div>
-          </div>
-        </div>
-
-
-        <div class="shareModal hidden" id="shareModal" role="dialog" aria-modal="true" aria-label="Share options">
-          <div class="shareCard">
-            <div class="shareHeader">
-              <div class="shareTitle">Share</div>
-              <button class="shareClose" id="shareClose" type="button" aria-label="Close share">✕</button>
-            </div>
-            <div class="shareSub">Choose what to share</div>
-            <div class="shareActions">
-              <button class="shareOptionBtn hidden" id="shareBossScoreBtn" type="button">Boss score</button>
-              <button class="shareOptionBtn" id="shareSiteLinkBtn" type="button">Site link</button>
-            </div>
-          </div>
-        </div>
 
       </section>
 
       <div class="footerArea">
-        <a class="checkBtn checkBtn--thin" id="toAdsBtn" href="./commercials.html">
+
+        <a class="checkBtn checkBtn--thin"
+           href="https://play.google.com/store/apps/details?id=uk.co.bossdeboss.bossmeter"
+           target="_blank">
           <span class="btnInner">
-            <span class="btnText">Boss Commercials</span>
+            <span class="btnText">Get the Boss Meter App</span>
           </span>
         </a>
 
         <div class="fineLinks">
-  <a class="fineLink" href="./about.html">About</a> ·
-  <a class="fineLink" href="./contact.html">Contact</a> ·
-
+          <a class="fineLink" href="./about.html">About</a> ·
+          <a class="fineLink" href="./contact.html">Contact</a> ·
           <a class="fineLink" href="./privacy.html">Privacy Policy</a>
         </div>
-       <p style="text-align:center; color: rgba(148,163,184,0.65); font-size:12px; margin-top:10px;">
-  © 2026 Boss Meter. All rights reserved.
-</p>
+
+        <p style="text-align:center; color: rgba(148,163,184,0.65); font-size:12px; margin-top:10px;">
+          © 2026 Boss Meter. All rights reserved.
+        </p>
 
       </div>
     </div>
-     </main>
+  </main>
 
   <script src="./script.js"></script>
-
-  <div class="cookieBanner hidden" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
-    <div class="cookieCard">
-      <div class="cookieText">
-        We use cookies to show ads and measure performance.
-        <a class="cookieLink" href="./privacy.html">Privacy Policy</a>
-      </div>
-      <div class="cookieActions">
-        <button class="cookieBtn cookieBtn--ghost" id="cookieDecline" type="button">Decline</button>
-        <button class="cookieBtn" id="cookieAccept" type="button">Accept</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
