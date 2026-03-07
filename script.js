@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // -------------------------
   // 1-hour cooldown (localStorage)
   // -------------------------
-  const COOLDOWN_MS = 1;// * 60 * 60 * 1000;
+  const COOLDOWN_MS = 12 * 60 * 60 * 1000;
   const STORAGE_KEY = "boss_last_check_ms";
   const RESULT_KEY = "boss_last_result";
   const HISTORY_KEY = "boss_history_v1";
