@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "uk.co.bossdeboss.bossmeter",
+      "sha256_cert_fingerprints": [
+        "03:EA:4B:98:9D:E3:07:44:83:87:1E:EB:DA:BB:B8:35:3F:90:DD:CC:D9:5E:86:7A:92:AF:56:2A:4E:AB:49:8F"
+      ]
+    }
+  }
+]
