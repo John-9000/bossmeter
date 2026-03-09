@@ -55,11 +55,11 @@ async function verifySignedScore(level, sig) {
 }
 
 function shareEmojiFor(level) {
-  if (level >= 90) return "⭐⭐⭐⭐⭐";
-  if (level >= 75) return "⭐⭐⭐⭐";
-  if (level >= 60) return "⭐⭐⭐";
-  if (level >= 40) return "⭐⭐";
-  return "⭐";
+  if (level >= 90) return "🏆";
+  if (level >= 70) return "👑";
+  if (level >= 50) return "⚡";
+  if (level >= 30) return "🎯";
+  return "✨";
 }
 
 const ICONS = {
