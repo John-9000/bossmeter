@@ -163,14 +163,13 @@ body{
   cursor: pointer;
   color: var(--white);
   font-size: 16px;
-   font-weight: 900;
+  font-weight: 900;
   background: linear-gradient(90deg, #f59e0b, #f97316, #ef4444);
   box-shadow: 0 14px 28px rgba(249,115,22,0.20);
   transition: transform .18s ease, filter .18s ease, opacity .18s ease;
 
-  /* Important: this button is sometimes an <a> and sometimes a <button>. */
   display:flex;
-  align-items:center;           /* vertical centering */
+  align-items:center;
   justify-content:center;
 }
 
@@ -219,14 +218,12 @@ body{
 
 .tierGrid{
   display:flex;
-  flex-wrap:nowrap;           /* default: single row */
+  flex-wrap:nowrap;
   gap: 3px;
   justify-content:center;
   align-items:stretch;
 }
 
-/* When the effective viewport gets narrow (e.g. user zooms in),
-   allow wrapping, while keeping rows centered. */
 @media (max-width: 340px){
   .tierGrid{ flex-wrap:wrap; }
 }
@@ -279,7 +276,7 @@ body{
 /* Ad box */
 .adBox{
   margin-top: 10px;
-  min-height: 250px; /* reserved space so ads don't jump */
+  min-height: 250px;
   border-radius: 18px;
   border: 1px solid rgba(51,65,85,1);
   background: rgba(15,23,42,0.55);
@@ -307,9 +304,9 @@ body{
 /* Back button on ads screen */
 .backBtn{
   margin-top: 18px;
-  width: auto;              /* 🔑 key change */
-  padding: 10px 22px;       /* button hugs the text */
-  border-radius: 999px;     /* pill shape */
+  width: auto;
+  padding: 10px 22px;
+  border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.92);
@@ -317,7 +314,7 @@ body{
   font-size: 18px;
   cursor:pointer;
   transition: transform .18s ease, filter .18s ease;
-  display: inline-flex;     /* keeps it tight */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -325,21 +322,17 @@ body{
 .backBtn:hover{ filter: brightness(1.06); transform: scale(1.01); }
 .backBtn:active{ transform: scale(0.99); }
 
-/* Slightly larger typography on bigger screens */
 @media (min-width: 520px){
   .card{ padding: 22px; }
   .title{ font-size: 26px; }
 }
 
-
-/* Ads screen: tighter layout like the first page */
 .card--ads{
   padding-top: 22px;
   padding-bottom: 22px;
 }
 
-
-/* Cookie consent banner (mobile-first, non-jumpy) */
+/* Cookie consent banner */
 .cookieBanner{
   position: fixed;
   left: 0;
@@ -395,9 +388,7 @@ body{
   .cookieText{ max-width: 420px; }
 }
 
-
-
-/* Progress bar (boss check) */
+/* Progress bar */
 .result.progressMode .resultNumber,
 .result.progressMode .resultTier,
 .result.progressMode .resultIcon{
@@ -437,11 +428,17 @@ body{
   transition: width 80ms linear;
 }
 
+.bossFunny{
+  text-align:center;
+  font-size:13px;
+  color: rgba(226,232,240,0.86);
+  line-height:1.35;
+  max-width: 30ch;
+}
 
-.bossFunny{ text-align:center; font-size:13px; color: rgba(226,232,240,0.86); line-height:1.35; max-width: 30ch; }
-/* Boss images (100) */
+/* Boss images */
 .resultArea{
-  overflow: hidden; /* crop images to the rectangle */
+  overflow: hidden;
 }
 
 .result{
@@ -453,25 +450,22 @@ body{
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* fill rectangle, crop excess */
+  object-fit: cover;
   z-index: 0;
 }
 
-/* If an image is active, hide the normal number/tier/icon so nothing overlays */
 .result.hasImage .resultNumber,
 .result.hasImage .resultTier,
 .result.hasImage .resultIcon{
   opacity: 0;
 }
 
-/* Make sure text stays above image for normal results */
 .resultNumber,
 .resultTier,
 .resultIcon{
   position: relative;
   z-index: 1;
 }
-
 
 /* Responsive tier boxes */
 .tierBox{flex: 1 1 0; max-width: 140px;}
@@ -480,164 +474,18 @@ body{
 }
 
 a.checkBtn{ text-decoration:none; }
-.adsTitle{margin: 0 0 12px; font-size: clamp(20px, 6vw, 28px); text-align:center; color: var(--text); opacity: .9;}
-
-/* Top corner actions (Share / Boss History) */
-.cornerActions{
-  position:absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
-  display:flex;
-  justify-content:space-between;
-  gap: 10px;
-  z-index: 5;
-  pointer-events:none; /* container ignores clicks */
-}
-.cornerBtn{
-  pointer-events:auto; /* buttons clickable */
-  height: 34px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(15,23,42,0.55);
-  color: rgba(255,255,255,0.92);
-  font-weight: 900;
-  font-size: 12px;
-  letter-spacing: .02em;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: transform .18s ease, filter .18s ease;
-}
-.cornerBtn:hover{ filter: brightness(1.06); transform: scale(1.02); }
-.cornerBtn:active{ transform: scale(0.98); }
-
-/* Boss History modal */
-.historyModal{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 18px 14px;
-  z-index: 60;
-}
-
-.historyModal.hidden{ display:none; }
-.historyCard{
-  width: min(560px, 100%);
-  background: rgba(15,23,42,0.94);
-  border: 1px solid rgba(51,65,85,1);
-  border-radius: 18px;
-  box-shadow: 0 25px 70px rgba(0,0,0,0.55);
-  padding: 14px;
-  backdrop-filter: blur(14px);
-}
-.historyHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.historyTitle{
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: .08em;
-  color: rgba(226,232,240,0.92);
-}
-.historySub{
-  margin: 2px 0 10px;
-  color: rgba(148,163,184,0.92);
-  font-size: 12px;
-}
-.historyClose{
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.92);
-  font-weight: 900;
-  cursor:pointer;
-}
-.historyClose:hover{ filter: brightness(1.06); }
-
-.historyList{
-  display:flex;
-  flex-direction:column;
-  gap: 12px;
-  padding: 6px 2px 2px;
-}
-.historyRow{
-  display:grid;
-  grid-template-columns: 100px 1fr 110px;
-  gap: 12px;
-  align-items:center;
-}
-@media (max-width: 420px){
-  .historyRow{ grid-template-columns: 86px 1fr 92px; gap: 10px; }
-}
-.historyLabel{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .02em;
-}
-.historyWhen{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .02em;
-  text-align:right;
-  color: rgba(226,232,240,0.78);
-}
-.historyBar{
-  position: relative;
-  height: 18px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.10);
-  overflow:hidden;
-}
-.historyBarFill{
-  position:absolute;
-  left:0; top:0; bottom:0;
-  width: 0%;
-  border-radius: 6px;
-  background: var(--gray);
-}
-.historyBarText{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight: 900;
-  font-size: 12px;
-  color: rgba(15,23,42,0.92);
-  text-shadow: 0 1px 0 rgba(255,255,255,0.35);
-}
-.historyEmpty{
-  text-align:center;
-  color: rgba(148,163,184,0.92);
-  font-size: 13px;
-  line-height: 1.4;
-  padding: 18px 8px;
-}
-
+.adsTitle{margin: 0 0 12px; font-size: clamp(20px, 6vw, 28px); text-align:center; color: var(--text); opacity: .9; }
 
 /* Shared link label */
 .bossFunny--shared{ color: rgba(148,163,184,0.92); }
 
-/* Fix orphan ::before / ::after artifacts on ads page (mobile) */
+/* Fix orphan ::before / ::after artifacts on ads page */
 .card--ads *::before,
 .card--ads *::after{
   content: none !important;
 }
 
-/* Fix AdSense left-edge placeholder artifact (mobile) */
+/* Fix AdSense left-edge placeholder artifact */
 .adBox ins.adsbygoogle{
   display: block !important;
   width: 100% !important;
@@ -648,7 +496,8 @@ a.checkBtn{ text-decoration:none; }
   display: block !important;
   width: 100% !important;
 }
-/* Share button inside the result rectangle (appears after roll) */
+
+/* Share button inside the result rectangle */
 .resultShareBtn{
   position: absolute;
   top: 10px;
@@ -659,9 +508,6 @@ a.checkBtn{ text-decoration:none; }
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(15,23,42,0.55);
   color: rgba(255,255,255,0.92);
-  font-weight: 900;
-  font-size: 16px;
-  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -669,6 +515,34 @@ a.checkBtn{ text-decoration:none; }
   backdrop-filter: blur(10px);
   z-index: 6;
   transition: transform .18s ease, filter .18s ease;
+  padding: 0;
+}
+.logo{
+  width:56px;
+  height:56px;
+  margin: 0 auto 10px auto;
+  border-radius: 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: transparent;
+  border: 1px solid #f59e0b;
+
+  box-shadow: 0 12px 24px rgba(0,0,0,0.28);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.resultShareBtn svg{
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .resultShareBtn:hover{ filter: brightness(1.06); transform: scale(1.03); }
 .resultShareBtn:active{ transform: scale(0.98); }
@@ -681,8 +555,7 @@ a.checkBtn{ text-decoration:none; }
   margin-top: 10px;
 }
 
-
-/* Share modal (top Share button) */
+/* Share modal */
 .shareModal{
   position: fixed;
   inset: 0;
@@ -755,8 +628,7 @@ a.checkBtn{ text-decoration:none; }
 .shareOptionBtn:hover{ filter: brightness(1.06); transform: scale(1.01); }
 .shareOptionBtn:active{ transform: scale(0.99); }
 
-
-/* App promo block under Check My Boss Level */
+/* App promo block */
 .appPromoCard{
   margin-top: 12px;
   padding: 10px 12px 6px;

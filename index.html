@@ -13,20 +13,8 @@
   <main class="page">
     <div class="wrap">
       <section class="card" aria-labelledby="title">
-        
-        <div class="cornerActions" aria-label="Top actions">
-          <button class="cornerBtn" id="historyBtn" type="button" aria-label="Open history">History</button>
-          <button class="cornerBtn" id="shareBtn" type="button" aria-label="Open share options">Share</button>
-        </div>
-
         <header class="header">
-          <div class="logo" aria-hidden="true">
-            <svg class="icon icon--white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 7l4 6 5-7 5 7 4-6v13H3V7z"></path>
-              <path d="M3 20h18"></path>
-            </svg>
-          </div>
+         
           <h1 id="title" class="title">Boss Meter</h1>
           <p class="subtitle">Discover your inner boss energy</p>
         </header>
@@ -37,11 +25,27 @@
           </div>
 
           <div class="result hidden" id="result" aria-live="polite">
+            <button
+  class="resultShareBtn hidden"
+  id="resultShareBtn"
+  type="button"
+  aria-label="Open share options"
+  title="Share"
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M6 12L16 6" />
+    <path d="M6 12L16 18" />
+    <circle cx="6" cy="12" r="2" />
+    <circle cx="16" cy="6" r="2" />
+    <circle cx="16" cy="18" r="2" />
+  </svg>
+</button>
+
             <img class="bossImage hidden" id="bossImage" alt="" />
             <div class="resultNumber" id="resultNumber">—</div>
             <div class="resultTier" id="resultTier">—</div>
             <div class="resultIcon" id="resultIcon" aria-hidden="true"></div>
-          
+
             <div class="progressBlock hidden" id="progressBlock" aria-label="Progress">
               <div class="progressValue" id="progressValue">0</div>
               <div class="progressTrack" aria-hidden="true">
@@ -80,8 +84,7 @@
             <div>Roll your Boss Score</div>
             <div>Share results with friends</div>
             <div>Track your Boss history</div>
-              <div>Compete with other bosses</div>
-              </div>
+          </div>
         </div>
 
         <section class="tiers" aria-label="Boss tiers">
@@ -109,17 +112,6 @@
             </div>
           </div>
         </section>
-
-        <div class="historyModal hidden" id="historyModal" role="dialog" aria-modal="true" aria-label="Boss history">
-          <div class="historyCard">
-            <div class="historyHeader">
-              <div class="historyTitle">Boss History</div>
-              <button class="historyClose" id="historyClose" type="button" aria-label="Close history">✕</button>
-            </div>
-            <div class="historySub">Last boss results</div>
-            <div class="historyList" id="historyList" aria-label="History list"></div>
-          </div>
-        </div>
 
         <div class="shareModal hidden" id="shareModal" role="dialog" aria-modal="true" aria-label="Share options">
           <div class="shareCard">

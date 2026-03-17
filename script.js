@@ -276,12 +276,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentLevel = null;
 
   // -------------------------
-  // 1-hour cooldown (localStorage)
+  // 12-hour cooldown (localStorage)
   // -------------------------
   const COOLDOWN_MS = 12 * 60 * 60 * 1000;
   const STORAGE_KEY = "boss_last_check_ms";
   const RESULT_KEY = "boss_last_result";
-  const HISTORY_KEY = "boss_history_v1";
 
   function getLastCheck() {
     const v = localStorage.getItem(STORAGE_KEY);
@@ -626,93 +625,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function loadHistory() {
-    try {
-      const raw = localStorage.getItem(HISTORY_KEY);
-      const arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function saveHistory(level) {
-    try {
-      const ts = Date.now();
-      const arr = loadHistory();
-      const newest = arr[0];
-
-      if (newest && newest.level === level && typeof newest.ts === "number" && (ts - newest.ts) < 1500) {
-        return;
-      }
-
-      const next = [{ level, ts }, ...arr].slice(0, 3);
-      localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
-    } catch {}
-  }
-
-  function formatWhen(ts) {
-    const now = Date.now();
-    const diffMs = Math.max(0, now - ts);
-    const hourMs = 60 * 60 * 1000;
-    const dayMs = 24 * 60 * 60 * 1000;
-
-    if (diffMs < hourMs) return "Just now";
-
-    const hours = Math.floor(diffMs / hourMs);
-    if (hours < 24) return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
-
-    if (hours < 48) return "Yesterday";
-
-    const days = Math.floor(diffMs / dayMs);
-    if (days < 14) return `${days} days ago`;
-
-    try {
-      return new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(new Date(ts));
-    } catch {
-      const d = new Date(ts);
-      return d.toLocaleDateString();
-    }
-  }
-
-  function shortTierLabel(level) {
-    const t = tierFor(level).title || "";
-    return t.replace(/\s*BOSS\s*$/i, "");
-  }
-
-  function renderHistory() {
-    const list = document.getElementById("historyList");
-    if (!list) return;
-
-    const items = loadHistory();
-    if (!items.length) {
-      list.innerHTML = '<div class="historyEmpty">No history yet.\n<br/>Check your Boss Level to create entries.</div>';
-      return;
-    }
-
-    list.innerHTML = items.map((it) => {
-      const lvl = Math.max(1, Math.min(100, Number(it.level) || 1));
-      const info = tierFor(lvl);
-      const label = shortTierLabel(lvl);
-      const when = formatWhen(Number(it.ts) || Date.now());
-      const color = getComputedStyle(document.documentElement).getPropertyValue(info.colorVar).trim() || "";
-
-      const safeLabel = label.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      const safeWhen = when.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-      return `
-        <div class="historyRow">
-          <div class="historyLabel" style="color:${color}">${safeLabel}</div>
-          <div class="historyBar" aria-label="Result ${lvl}">
-            <div class="historyBarFill" style="width:${lvl}%; background:${color}"></div>
-            <div class="historyBarText">${lvl}</div>
-          </div>
-          <div class="historyWhen" style="color:${color}">${safeWhen}</div>
-        </div>
-      `;
-    }).join("");
-  }
-
   if (btnIcon) btnIcon.innerHTML = ICONS.centerFocusStrong;
   updateCooldownUI();
   startCooldownTicker();
@@ -727,11 +639,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 0);
     }
   } catch {}
-
-  const shareBtn = document.getElementById("shareBtn");
-  const historyBtn = document.getElementById("historyBtn");
-  const historyModal = document.getElementById("historyModal");
-  const historyClose = document.getElementById("historyClose");
 
   async function shareBossScore(level) {
     if (!Number.isFinite(level) || level < 1 || level > 100) return;
@@ -755,26 +662,6 @@ document.addEventListener("DOMContentLoaded", () => {
       prompt("Copy this:", payload);
     }
   }
-
-  resultShareBtn?.addEventListener("click", async () => {
-    await shareBossScore(currentLevel);
-  });
-
-  function openHistory() {
-    if (!historyModal) return;
-    renderHistory();
-    historyModal.classList.remove("hidden");
-  }
-
-  function closeHistory() {
-    historyModal?.classList.add("hidden");
-  }
-
-  historyBtn?.addEventListener("click", openHistory);
-  historyClose?.addEventListener("click", closeHistory);
-  historyModal?.addEventListener("click", (e) => {
-    if (e.target === historyModal) closeHistory();
-  });
 
   const shareModal = document.getElementById("shareModal");
   const shareClose = document.getElementById("shareClose");
@@ -811,15 +698,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  shareBtn?.addEventListener(
-    "click",
-    (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      openShareModal();
-    },
-    { passive: false }
-  );
+  resultShareBtn?.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openShareModal();
+  });
 
   shareClose?.addEventListener("click", closeShareModal);
   shareModal?.addEventListener("click", (e) => {
@@ -898,7 +781,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderFunny(funnyText);
 
       saveLastResult(level, funnyText);
-      saveHistory(level);
 
       setAnimating(false);
       timer = null;
