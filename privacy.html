@@ -1,198 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boss Meter Privacy Policy</title>
-
     <style>
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-            background: linear-gradient(180deg, #0d1b2a, #1b263b);
-            color: #e0e6ed;
+        :root {
+            --bg-1: #071b2f;
+            --bg-2: #0a2340;
+            --card: #213856;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f5f1eb;
+            --text-secondary: #b5c0cf;
+            --text-muted: #93a3b7;
+            --accent: #f5f1eb;
+            --link: #d7e6ff;
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+            --radius: 34px;
         }
 
-        .container {
-            max-width: 860px;
-            margin: 40px auto;
-            padding: 32px;
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+            color: var(--text-primary);
+            background:
+                radial-gradient(circle at top left, rgba(10, 43, 82, 0.55), transparent 34%),
+                linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            padding: 56px 24px;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .card {
-            background: linear-gradient(180deg, #1e2f44, #1b2a3d);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 64px 72px;
+            overflow-wrap: break-word;
         }
 
         h1 {
-            margin-top: 0;
-            font-size: 2.6rem;
+            margin: 0 0 48px 0;
+            font-size: clamp(48px, 7vw, 88px);
+            line-height: 0.96;
             font-weight: 800;
-            color: #ffffff;
+            letter-spacing: -0.04em;
+            color: var(--accent);
         }
 
         .updated {
-            color: #9aa7b5;
-            margin-bottom: 28px;
-            font-size: 0.95rem;
-        }
-
-        h2 {
-            margin-top: 28px;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            color: #c7d2de;
+            margin: 0 0 56px 0;
+            font-size: 26px;
+            line-height: 1.4;
+            color: var(--text-muted);
+            font-weight: 400;
         }
 
         p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #d3dbe3;
-            margin-bottom: 18px;
+            margin: 0 0 28px 0;
+            font-size: 23px;
+            line-height: 1.72;
+            color: var(--text-primary);
+        }
+
+        .intro {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            margin: 58px 0 26px 0;
+            font-size: clamp(28px, 4vw, 46px);
+            line-height: 1.14;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--accent);
         }
 
         ul {
-            margin-left: 22px;
-            margin-bottom: 18px;
+            margin: 0 0 28px 0;
+            padding-left: 34px;
         }
 
         li {
-            margin-bottom: 8px;
-            color: #d3dbe3;
+            margin: 0 0 14px 0;
+            font-size: 23px;
+            line-height: 1.72;
+            color: var(--text-primary);
         }
 
         a {
-            color: #7fb3ff;
-            text-decoration: none;
-        }
-
-        a:hover {
+            color: var(--link);
             text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
         .contact {
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .footer {
-            margin-top: 32px;
-            color: #8a98a8;
-            font-size: 0.9rem;
+            margin-top: 52px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            font-size: 20px;
+            line-height: 1.6;
         }
 
-        .back {
-            margin-top: 24px;
+        .back-home {
             display: inline-block;
-            color: #c7d2de;
-            border-bottom: 1px dashed rgba(255,255,255,0.3);
-            text-decoration: none;
-            padding-bottom: 2px;
+            margin-top: 18px;
+            color: var(--link);
+            font-size: 20px;
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
-        .back:hover {
-            color: #ffffff;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin: 16px;
-                padding: 0;
+        @media (max-width: 900px) {
+            body {
+                padding: 24px 14px;
             }
 
             .card {
-                padding: 24px;
+                padding: 34px 22px;
+                border-radius: 24px;
             }
 
-            h1 {
-                font-size: 2rem;
+            .updated,
+            p,
+            li {
+                font-size: 18px;
+            }
+
+            .footer,
+            .back-home {
+                font-size: 17px;
+            }
+
+            ul {
+                padding-left: 24px;
             }
         }
     </style>
 </head>
-
 <body>
+    <div class="wrap">
+        <main class="card">
+            <h1>Privacy Policy</h1>
 
-<div class="container">
-    <div class="card">
+            <p class="updated">Last updated: 2026</p>
 
-        <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: 2026</p>
+            <p class="intro">
+                Boss Meter is an entertainment application designed for fun and sharing purposes.
+            </p>
 
-        <p>Boss Meter is an entertainment application that generates a score for fun and sharing purposes.</p>
+            <h2>1. Information We Collect</h2>
+            <p>
+                Boss Meter does not require users to create an account and does not directly collect personal information
+                such as name, email address, or phone number.
+            </p>
+            <p>
+                All scores and app usage data are generated and stored locally on the user's device.
+                This data is not transmitted to any external servers by the app itself.
+            </p>
 
-        <h2>1. Information We Collect</h2>
-        <p>Boss Meter does not require users to create an account and does not directly collect personal information such as name, email address, or phone number.</p>
-        <p>All scores and app usage data are generated and stored locally on the user's device and are not transmitted to any external servers by the app itself.</p>
+            <h2>2. Advertising</h2>
+            <p>
+                Boss Meter may display advertisements through Google AdMob <strong>only when the user chooses to view commercials</strong>.
+            </p>
+            <p>
+                Google AdMob may collect and process certain data automatically to provide, personalize,
+                and improve advertising services. This may include data such as:
+            </p>
+            <ul>
+                <li>Device information</li>
+                <li>Advertising identifiers (such as Google Advertising ID)</li>
+                <li>IP address</li>
+                <li>App interaction data</li>
+                <li>Diagnostic and performance data</li>
+            </ul>
+            <p>
+                This data is collected and processed directly by Google in accordance with its own privacy policies.
+            </p>
+            <p>
+                Users may be presented with privacy and consent options such as <strong>Privacy Choices</strong>, where applicable.
+            </p>
+            <p>
+                For more information, please review Google's Privacy Policy:<br />
+                <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>
+            </p>
 
-        <h2>2. Advertising</h2>
-        <p>Boss Meter may display advertisements through Google AdMob when the user chooses to view commercials.</p>
-        <p>Google AdMob collects and processes certain data automatically to provide, personalize, and improve advertising services. This may include:</p>
+            <h2>3. Data Usage</h2>
+            <p>Any data collected through third-party services is used for:</p>
+            <ul>
+                <li>Delivering advertisements</li>
+                <li>Improving ad performance and relevance</li>
+                <li>Ensuring proper functionality of the app</li>
+            </ul>
+            <p>
+                Boss Meter itself does not use or store personal data externally.
+            </p>
 
-        <ul>
-            <li>Device information</li>
-            <li>Advertising identifiers (such as Google Advertising ID)</li>
-            <li>IP address</li>
-            <li>App interaction data</li>
-            <li>Diagnostic and performance data</li>
-        </ul>
+            <h2>4. Data Storage</h2>
+            <p>
+                Boss Meter does not store personal data on external servers. Any settings or generated scores
+                remain locally on the user's device.
+            </p>
+            <p>
+                If the application is uninstalled, all locally stored data is permanently removed.
+            </p>
 
-        <p>This data is collected and processed directly by Google in accordance with its privacy policies.</p>
+            <h2>5. Third-Party Services</h2>
+            <p>Boss Meter uses the following third-party service:</p>
+            <ul>
+                <li>Google AdMob (advertising)</li>
+            </ul>
+            <p>
+                These services may collect and process data according to their own privacy policies.
+            </p>
 
-        <p>
-            For more information, please review Google's Privacy Policy:<br>
-            <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>
-        </p>
+            <h2>6. Children’s Privacy</h2>
+            <p>
+                Boss Meter is not directed toward children and does not knowingly collect personal information from children.
+            </p>
 
-        <h2>3. Data Usage</h2>
-        <p>Any data collected through third-party services is used for:</p>
+            <h2>7. Your Rights</h2>
+            <p>
+                Depending on your location, you may have rights regarding your personal data, including the right to request
+                access, correction, or deletion of your data.
+            </p>
+            <p>
+                Since Boss Meter does not store personal data directly, such requests should be directed to the relevant
+                third-party service providers such as Google.
+            </p>
 
-        <ul>
-            <li>Delivering advertisements</li>
-            <li>Improving ad performance and relevance</li>
-            <li>Ensuring proper functionality of the app</li>
-        </ul>
+            <h2>8. Changes to This Privacy Policy</h2>
+            <p>
+                This Privacy Policy may be updated from time to time. Any changes will be reflected in the updated version of this document.
+            </p>
 
-        <p>Boss Meter itself does not use or store personal data externally.</p>
+            <h2>9. Contact</h2>
+            <p class="contact">
+                If you have any questions regarding this Privacy Policy, you can contact:
+            </p>
+            <p>
+                Boss Meter Developer<br />
+                <a href="mailto:support@unrstudio.com">support@unrstudio.com</a>
+            </p>
 
-        <h2>4. Data Storage</h2>
-        <p>Boss Meter does not store personal data on external servers. Any settings or generated scores remain locally on the user's device.</p>
-
-        <h2>5. Third-Party Services</h2>
-        <p>Boss Meter uses the following third-party service:</p>
-        <ul>
-            <li>Google AdMob (advertising)</li>
-        </ul>
-
-        <p>These services may collect and process data according to their own privacy policies.</p>
-
-        <h2>6. Children's Privacy</h2>
-        <p>Boss Meter is not directed toward children under the age of 13. The application does not knowingly collect personal information from children.</p>
-
-        <h2>7. Your Rights</h2>
-        <p>Depending on your location, you may have rights regarding your personal data, including the right to request access, correction, or deletion of your data.</p>
-
-        <p>Since Boss Meter does not store personal data directly, such requests should be directed to the relevant third-party service providers (such as Google).</p>
-
-        <h2>8. Changes to This Privacy Policy</h2>
-        <p>This Privacy Policy may be updated from time to time. Any changes will be reflected in the updated version of this document.</p>
-
-        <h2>9. Contact</h2>
-        <p>If you have any questions regarding this Privacy Policy, you can contact:</p>
-
-        <p class="contact">
-            Boss Meter Developer<br>
-            <a href="mailto:support@unrstudio.com">support@unrstudio.com</a>
-        </p>
-
-        <p class="footer">© 2026 Boss Meter</p>
-
-        <a href="/" class="back">Back to home</a>
-
+            <div class="footer">
+                © 2026 Boss Meter
+                <br />
+                <a class="back-home" href="/">Back to home</a>
+            </div>
+        </main>
     </div>
-</div>
-
 </body>
 </html>
