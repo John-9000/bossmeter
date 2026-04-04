@@ -1,7 +1,7 @@
 // --- Linear weighted boss roll (low numbers more common, high rarer) ---
 function rollBossLinearWeights() {
-  const w1 = 0.9;   // weight at 1 (most common)
-  const w100 = 1.1; // weight at 100 (rarest)
+  const w1 = 1.1;   // weight at 1 (most common)
+  const w100 = 0.9; // weight at 100 (rarest)
 
   let total = 0;
   for (let n = 1; n <= 100; n++) {
