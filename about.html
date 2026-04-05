@@ -1,191 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us - Boss Meter</title>
-  <style>
-    :root {
-      --bg-1: #07142b;
-      --bg-2: #0a1833;
-      --card-bg: #1b2b44;
-      --card-border: rgba(110, 145, 200, 0.22);
-      --text-primary: #f4f7fb;
-      --text-secondary: #c8d2e3;
-      --text-muted: #96a4bc;
-      --link: #d8dde8;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      min-height: 100%;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top center, rgba(32, 68, 128, 0.22), transparent 34%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
-      color: var(--text-primary);
-    }
-
-    body {
-      padding: 32px 16px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 920px;
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 42px;
-      box-shadow: var(--shadow);
-      padding: 42px 48px 40px;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      line-height: 0.95;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-    }
-
-    .eyebrow {
-      margin: 0 0 34px;
-      font-size: clamp(1.2rem, 2vw, 1.7rem);
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    p {
-      margin: 0 0 34px;
-      font-size: clamp(1.28rem, 2vw, 1.65rem);
-      line-height: 1.72;
-      color: var(--text-secondary);
-      letter-spacing: -0.01em;
-    }
-
-    .section-title {
-      margin: 0 0 16px;
-      font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    ul {
-      margin: 0 0 34px 0;
-      padding-left: 1.3em;
-      color: var(--text-secondary);
-      font-size: clamp(1.18rem, 1.8vw, 1.45rem);
-      line-height: 1.8;
-    }
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    .copyright {
-      margin-top: 6px;
-      margin-bottom: 42px;
-      font-size: clamp(1rem, 1.4vw, 1.25rem);
-      color: var(--text-muted);
-    }
-
-    .back-link {
-      display: inline-block;
-      color: var(--link);
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 6px;
-      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
-      transition: opacity 0.2s ease;
-    }
-
-    .back-link:hover {
-      opacity: 0.8;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 16px 10px;
-      }
-
-      .card {
-        border-radius: 28px;
-        padding: 28px 22px 28px;
-      }
-
-      p,
-      ul {
-        line-height: 1.6;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="card">
-    <h1>About Us</h1>
-    <p class="eyebrow">What is Boss Meter?</p>
+  <main class="page">
+    <div class="wrap">
+      <section class="card">
+        <h1 class="title">About Us</h1>
+        <p class="subtitle">What is Boss Meter?</p>
 
-    <p>
-      Boss Meter is a fun, lightweight mobile app created purely for entertainment.
-    </p>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          Boss Meter is a fun, lightweight mobile app created purely for entertainment.
+        </p>
 
-    <p>
-      It generates a randomized “boss level” score designed to be playful and
-      motivational, not a scientific, psychological, or professional assessment.
-      Refined ad experience — no interruptions, even in the free version ads appear only when you choose, and in the premium version ads can be removed completely.
-    </p>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          It generates a randomized “boss level” score designed to be playful and
+          motivational, not a scientific, psychological, or professional assessment.
+          Refined ad experience — no interruptions, even in the free version ads appear only when you choose, and in the premium version ads can be removed completely.
+        </p>
 
-    <div class="section-title">Free version includes:</div>
-    <ul>
-      <li>Boss score rolls &amp; tier system</li>
-      <li>2 Boss themes (Classic, Gold)</li>
-      <li>History</li>
-      <li>Boss Commercials (non-intrusive)</li>
-      <li>Timer-end notifications</li>
-    </ul>
+        <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+          Free version includes:
+        </p>
+        <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
+          <li>Boss score rolls &amp; tier system</li>
+          <li>2 Boss themes (Classic, Gold)</li>
+          <li>History</li>
+          <li>Boss Commercials (non-intrusive)</li>
+          <li>Timer-end notifications</li>
+        </ul>
 
-    <div class="section-title">Premium version unlocks:</div>
-    <ul>
-      <li>6 additional Boss themes (White, Purple, Silver, Midnight, Ocean, Azure)</li>
-      <li>Instant roll &amp; custom roll timer</li>
-      <li>Extended history</li>
-      <li>Ad-free option &amp; premium Boss visuals</li>
-    </ul>
+        <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+          Premium version unlocks:
+        </p>
+        <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
+          <li>6 additional Boss themes (White, Purple, Silver, Midnight, Ocean, Azure)</li>
+          <li>Instant roll &amp; custom roll timer</li>
+          <li>Extended history</li>
+          <li>Ad-free option &amp; premium Boss visuals</li>
+        </ul>
 
-    <div class="section-title">Boss Inspiration button</div>
-    <p>
-      Provides a quote from a well-known successful figure once every two hours.
-      Quotes are collected from public sources and are attributed to their respective
-      authors. Some quotes may be paraphrased.
-    </p>
+        <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+          Boss Inspiration button
+        </p>
 
-    <p>
-      Boss Meter does not require an account and does not directly collect personal
-      information. The app may display ads provided by third-party services
-      (such as Google AdMob), which may collect data in accordance with their own
-      privacy policies.
-    </p>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          Provides a quote from a well-known successful figure once every two hours.
+          Quotes are collected from public sources and are attributed to their respective
+          authors. Some quotes may be paraphrased.
+        </p>
 
-    <p>
-      All results are for entertainment purposes only and should not be interpreted
-      as advice of any kind.
-    </p>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          Boss Meter does not require an account and does not directly collect personal
+          information. The app may display ads provided by third-party services
+          (such as Google AdMob), which may collect data in accordance with their own
+          privacy policies.
+        </p>
 
-    <p>Enjoy Boss Meter.</p>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          All results are for entertainment purposes only and should not be interpreted
+          as advice of any kind.
+        </p>
 
-    <div class="copyright">© 2026 Boss Meter. All rights reserved.</div>
+        <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+          Enjoy Boss Meter.
+        </p>
 
-    <a class="back-link" href="/">Back to home</a>
+        <p style="color: rgba(148,163,184,0.75); font-size:12px; margin-top:16px;">
+          © 2026 Boss Meter. All rights reserved.
+        </p>
+
+        <p style="margin-top:18px;">
+          <a href="./index.html" class="fineLink">Back to home</a>
+        </p>
+      </section>
+    </div>
   </main>
 </body>
 </html>
