@@ -1,33 +1,32 @@
-// --- Linear weighted boss roll (low numbers more common, high rarer) ---
 function rollBossLinearWeights() {
-  const w1 = 1.1;   // weight at 1 (most common)
-  const w100 = 0.9; // weight at 100 (rarest)
+  const w1 = 1.1;
+  const w100 = 0.9;
 
   let total = 0;
-  for (let n = 1; n <= 100; n++) {
+  for (let n = 1; n <= 100; n += 1) {
     const t = (n - 1) / 99;
     total += w1 + (w100 - w1) * t;
   }
 
   let r = Math.random() * total;
-  for (let n = 1; n <= 100; n++) {
+  for (let n = 1; n <= 100; n += 1) {
     const t = (n - 1) / 99;
     r -= w1 + (w100 - w1) * t;
     if (r <= 0) return n;
   }
+
   return 100;
 }
 
 const BASE_URL = "https://bossmeter.app";
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=uk.co.bossdeboss.bossmeter";
-
-// --- Signed score sharing (client-side signature) ---
-// Note: this is an integrity check, not a secret (the key ships to clients).
 const SIGNING_SECRET = "bossdeboss-score-v1";
 
 function toBase64Url(bytes) {
   let binary = "";
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  for (let index = 0; index < bytes.length; index += 1) {
+    binary += String.fromCharCode(bytes[index]);
+  }
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 }
 
@@ -55,11 +54,11 @@ async function verifySignedScore(level, sig) {
 }
 
 function shareEmojiFor(level) {
-  if (level >= 90) return "🏆";
-  if (level >= 70) return "👑";
-  if (level >= 50) return "⚡";
-  if (level >= 30) return "🎯";
-  return "✨";
+  if (level >= 90) return "\uD83C\uDFC6";
+  if (level >= 70) return "\uD83D\uDC51";
+  if (level >= 50) return "\u26A1";
+  if (level >= 30) return "\uD83C\uDFAF";
+  return "\u2728";
 }
 
 const ICONS = {
@@ -72,9 +71,7 @@ const ICONS = {
   starOutline:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
   star:
-    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
-  megaphone:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a2 2 0 0 0 2 2h2l5 4V5L7 9H5a2 2 0 0 0-2 2z"></path><path d="M16 8a3 3 0 0 1 0 8"></path><path d="M19 5a7 7 0 0 1 0 14"></path></svg>',
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>'
 };
 
 function tierFor(level) {
@@ -85,202 +82,173 @@ function tierFor(level) {
   return { title: "NOVICE BOSS", colorVar: "--gray", icon: "autoAwesome" };
 }
 
-const FUNNY_TEXTS = {
-  novice: [
-    "Every boss starts somewhere",
-    "Still reading the boss manual",
-    "Coffee break boss energy",
-    "Boss in training mode",
-    "Keyboard louder than confidence",
-    "Assistant to the regional boss",
-    "Wi-Fi stronger than power",
-    "Still unlocking boss skills",
-    "Boss vibes buffering…",
-    "Learning the secret handshake",
-    "Boss shoes still shiny",
-    "Power nap certified",
-    "Boss alarm snoozed",
-    "Spreadsheet warrior",
-    "Boss aura loading…",
-    "Motivation pending approval",
-    "Office chair CEO",
-    "Almost intimidating",
-    "Boss energy on airplane mode",
-    "Practicing the stare",
-    "Budget boss",
-    "Boss level: tutorial",
-    "Confidence warming up",
-    "Boss instincts downloading…",
-    "Legend pending",
-    "Small boss, big dreams",
-    "Not bossy—just ambitious",
-    "CEO of “maybe later”",
-    "Junior boss vibes. You’ll get there",
-    "Still in tutorial mode 😄",
-    "Small steps. Big boss later",
-    "Boss energy loading… please wait",
-    "Accidentally powerful",
-    "Still reading the tutorial",
-    "Boss in training wheels",
-    "Confidently unsure",
-    "Main character in the background",
-    "Pressed the boss button by mistake",
-  ],
-  apprentice: [
-    "Boss with potential",
-    "Confidence upgraded",
-    "People starting to notice",
-    "Boss energy rising",
-    "Office legend rumors",
-    "Still humble, mostly",
-    "Boss handshake unlocked",
-    "Voice carries further",
-    "Meetings fear you",
-    "Keyboard respected",
-    "Coffee obeys you",
-    "Promotion aura detected",
-    "Boss mode warming",
-    "Authority increasing",
-    "Decisions slightly faster",
-    "Boss instincts sharp",
-    "Desk presence strong",
-    "Leadership beta",
-    "Power stance improving",
-    "Boss shoes broken in",
-    "Respect installing…",
-    "Boss playlist curated",
-    "Confidence compiling…",
-    "Boss brain online",
-    "Almost legendary",
-    "You’re not late—you’re dramatic",
-    "Rising like fresh toast",
-    "CEO of “good enough”",
-    "Respectable boss energy",
-    "You're leveling up fast",
-    "Not bad… not bad at all",
-  ],
-  rising: [
-    "People listen now",
-    "Boss energy undeniable",
-    "Meetings end faster",
-    "Decisions land hard",
-    "Boss presence felt",
-    "Power suit energy",
-    "Confidence at scale",
-    "Voice carries weight",
-    "Room temperature changes",
-    "Boss aura stable",
-    "Respect delivered",
-    "Authority unlocked",
-    "Boss instincts sharp",
-    "Momentum building",
-    "Eyes follow you",
-    "Keyboard obeys",
-    "Boss energy certified",
-    "Leadership activated",
-    "No nonsense detected",
-    "Commanding presence",
-    "Boss level rising",
-    "Strategy installed",
-    "Confidence overflow",
-    "Boss energy flex",
-    "Legend forming",
-    "Walking KPI",
-    "You negotiate with gravity",
-    "Meetings request *you*",
-    "Boss momentum is real",
-    "People are starting to listen",
-    "Confidence: unlocked",
-  ],
-  elite: [
-    "Room goes quiet",
-    "Boss energy intimidating",
-    "Decisions shape reality",
-    "Authority unquestioned",
-    "Power walks louder",
-    "Boss aura maxed",
-    "Respect guaranteed",
-    "Leadership absolute",
-    "Meetings obey",
-    "Confidence unstoppable",
-    "Boss instincts elite",
-    "Commanding silence",
-    "Strategy flawless",
-    "Boss presence heavy",
-    "Influence detected",
-    "Boss energy peaks",
-    "Power undeniable",
-    "Leadership refined",
-    "Elite mindset active",
-    "Boss moves decisive",
-    "Authority mastered",
-    "Confidence lethal",
-    "Boss legend near",
-    "Feared politely",
-    "Your calendar fears you",
-    "You don’t chase goals—goals chase you",
-    "Handshake is a contract",
-    "Elite aura detected 😎",
-    "CEO energy. No refunds",
-    "You walk in, the room changes",
-  ],
-  legendary: [
-    "Boss mythology confirmed",
-    "Legend walks among us",
-    "Reality bends slightly",
-    "Boss energy absolute",
-    "Power unmatched",
-    "History remembers this",
-    "Authority unquestionable",
-    "Boss aura eternal",
-    "Legends whisper",
-    "Respect infinite",
-    "Power level capped",
-    "Boss final form",
-    "Legacy activated",
-    "Influence timeless",
-    "Boss energy god-tier",
-    "Legend certified",
-    "Myth unlocked",
-    "Boss presence iconic",
-    "Power perfected",
-    "History rewritten",
-    "Boss energy complete",
-    "Ultimate authority",
-    "Legend status permanent",
-    "Reality approves",
-    "Boss achieved",
-    "Your name is a strategy",
-    "Even luck takes notes",
-    "The room pays rent to you",
-    "Legend status confirmed",
-    "Absolute unit of boss",
-    "This is what power looks like",
-    "You did not roll this, you earned it",
-    "Other bosses listen",
-    "Power level confidential",
-    "Destiny adjusted accordingly",
-    "Achieved boss enlightenment",
-    "The end credits roll early",
-    "Boss of bosses",
-  ],
-};
-
 function setColor(el, cssVarName) {
   if (!el) return;
   const color = getComputedStyle(document.documentElement).getPropertyValue(cssVarName).trim();
   el.style.color = color || "";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  let currentLevel = null;
+function formatRemaining(ms) {
+  const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const parts = [];
 
-  // -------------------------
-  // 12-hour cooldown (localStorage)
-  // -------------------------
-  const COOLDOWN_MS = 12 * 60 * 60 * 1000;
+  if (hours > 0) parts.push(`${hours}h`);
+  if (minutes > 0 || hours > 0) parts.push(`${minutes}m`);
+  parts.push(`${seconds}s`);
+
+  return parts.join(" ");
+}
+
+function getStoredJson(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function setStoredJson(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {}
+}
+
+function getCookieJson(key) {
+  try {
+    const match = document.cookie.match(new RegExp(`(?:^|; )${key.replace(/[.$?*|{}()[\]\\/+^]/g, "\\$&")}=([^;]*)`));
+    const raw = match ? decodeURIComponent(match[1]) : "";
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function setCookieJson(key, value, days = 7) {
+  try {
+    const encoded = encodeURIComponent(JSON.stringify(value));
+    document.cookie = `${key}=${encoded}; max-age=${days * 24 * 60 * 60}; path=/; samesite=lax`;
+  } catch {}
+}
+
+function getSyncedJson(key) {
+  const local = getStoredJson(key);
+  const cookie = getCookieJson(key);
+  const localUpdatedAt = Number(local?.updatedAt);
+  const cookieUpdatedAt = Number(cookie?.updatedAt);
+
+  if (Number.isFinite(localUpdatedAt) && Number.isFinite(cookieUpdatedAt)) {
+    return localUpdatedAt >= cookieUpdatedAt ? local : cookie;
+  }
+
+  return local || cookie;
+}
+
+function setSyncedJson(key, value) {
+  setStoredJson(key, value);
+  setCookieJson(key, value);
+}
+
+function getInspirationState(now, durationMs, storageKey, quotes) {
+  if (!Array.isArray(quotes) || quotes.length === 0 || durationMs <= 0) {
+    return {
+      quote: "",
+      updatedAt: now,
+      percent: 0,
+      ready: false
+    };
+  }
+
+  const stored = getSyncedJson(storageKey);
+  const storedQuoteIndex = Number(stored?.quoteIndex);
+  const storedUpdatedAt = Number(stored?.updatedAt);
+  const storedQuote = Number.isInteger(storedQuoteIndex) && storedQuoteIndex >= 0 && storedQuoteIndex < quotes.length
+    ? quotes[storedQuoteIndex]
+    : "";
+
+  if (!storedQuote || !Number.isFinite(storedUpdatedAt)) {
+    const initial = {
+      quoteIndex: 0,
+      updatedAt: now - durationMs
+    };
+    setSyncedJson(storageKey, initial);
+    return {
+      quote: quotes[0],
+      quoteIndex: 0,
+      updatedAt: initial.updatedAt,
+      percent: 100,
+      ready: true
+    };
+  }
+
+  const elapsed = Math.max(0, now - storedUpdatedAt);
+  const percent = Math.max(0, Math.min(100, Math.round((elapsed / durationMs) * 100)));
+  const ready = percent >= 100;
+
+  return {
+    quote: storedQuote,
+    quoteIndex: storedQuoteIndex,
+    updatedAt: storedUpdatedAt,
+    percent,
+    ready
+  };
+}
+
+function parseInspirationQuote(raw) {
+  const value = String(raw || "").trim();
+  const colonIndex = value.indexOf(":");
+  if (colonIndex > 0 && colonIndex < value.length - 1) {
+    return {
+      author: value.slice(0, colonIndex).trim(),
+      quote: value.slice(colonIndex + 1).trim()
+    };
+  }
+
+  return {
+    author: "",
+    quote: value
+  };
+}
+
+function getLastSavedBossLevel(resultKey) {
+  const local = getStoredJson(resultKey);
+  const session = (() => {
+    try {
+      const raw = sessionStorage.getItem(resultKey);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  })();
+
+  const localLevel = Number(local?.level);
+  if (Number.isFinite(localLevel) && localLevel >= 1 && localLevel <= 100) return localLevel;
+
+  const sessionLevel = Number(session?.level);
+  if (Number.isFinite(sessionLevel) && sessionLevel >= 1 && sessionLevel <= 100) return sessionLevel;
+
+  return null;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const COOLDOWN_MS = 1 * 60 * 60 * 1000;
+  const INSPIRATION_MS = 6 * 60 * 60 * 1000;
   const STORAGE_KEY = "boss_last_check_ms";
   const RESULT_KEY = "boss_last_result";
+  const INSPIRATION_KEY = "boss_inspiration";
+  const COMMERCIAL_HEADER_KEY = "boss_commercial_header";
+  const CONSENT_KEY = "boss_cookie_consent";
+  const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
+  const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
+  const inspirationChannel = "BroadcastChannel" in window
+    ? new BroadcastChannel("boss_inspiration_sync")
+    : null;
+
+  let currentLevel = null;
+  let adsenseLoaded = false;
 
   function getLastCheck() {
     const v = localStorage.getItem(STORAGE_KEY);
@@ -292,36 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, String(ms));
   }
 
-  function formatRemaining(ms) {
-    const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    const parts = [];
-    if (hours > 0) parts.push(`${hours}h`);
-    if (minutes > 0 || hours > 0) parts.push(`${minutes}m`);
-    parts.push(`${seconds}s`);
-
-    return parts.join(" ");
-  }
-
-  // -------------------------
-  // Cookie consent + AdSense load gating (localStorage)
-  // -------------------------
-  const CONSENT_KEY = "boss_cookie_consent";
-  const cookieBanner = document.getElementById("cookieBanner");
-  const cookieAccept = document.getElementById("cookieAccept");
-  const cookieDecline = document.getElementById("cookieDecline");
-
-  const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
-  const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
-
-  let adsenseLoaded = false;
-
   function getCookie(name) {
     try {
-      const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.$?*|{}()[\]\\/+^]/g, '\\$&') + '=([^;]*)'));
+      const m = document.cookie.match(new RegExp(`(?:^|; )${name.replace(/[.$?*|{}()[\]\\/+^]/g, "\\$&")}=([^;]*)`));
       return m ? decodeURIComponent(m[1]) : null;
     } catch {
       return null;
@@ -339,14 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return localStorage.getItem(CONSENT_KEY) || getCookie(CONSENT_KEY);
   }
 
-  function setConsent(v) {
-    localStorage.setItem(CONSENT_KEY, v);
-    setCookie(CONSENT_KEY, v, 365);
-  }
-
-  function showCookieBanner(show) {
-    if (!cookieBanner) return;
-    cookieBanner.classList.toggle("hidden", !show);
+  function setConsent(value) {
+    localStorage.setItem(CONSENT_KEY, value);
+    setCookie(CONSENT_KEY, value, 365);
   }
 
   function loadAdSenseOnce() {
@@ -357,11 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     adsenseLoaded = true;
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = ADSENSE_SRC;
-    s.crossOrigin = "anonymous";
-    document.head.appendChild(s);
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = ADSENSE_SRC;
+    script.crossOrigin = "anonymous";
+    document.head.appendChild(script);
   }
 
   function tryRenderAds() {
@@ -369,11 +305,20 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAdSenseOnce();
 
     const units = document.querySelectorAll("ins.adsbygoogle");
-    units.forEach((u) => {
-      if (u.getAttribute("data-ads-init") === "1") return;
-      u.setAttribute("data-ads-init", "1");
+    units.forEach((unit) => {
+      if (unit.getAttribute("data-ads-init") === "1") return;
+      unit.setAttribute("data-ads-init", "1");
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     });
+  }
+
+  const cookieBanner = document.getElementById("cookieBanner");
+  const cookieAccept = document.getElementById("cookieAccept");
+  const cookieDecline = document.getElementById("cookieDecline");
+
+  function showCookieBanner(show) {
+    if (!cookieBanner) return;
+    cookieBanner.classList.toggle("hidden", !show);
   }
 
   const consent = getConsent();
@@ -397,9 +342,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tryRenderAds();
 
-  // -------------------------
-  // Shared score page
-  // -------------------------
+  const commercialsHeader = document.getElementById("commercialsHeader");
+  function refreshCommercialsHeader() {
+    if (!commercialsHeader || !window.BOSS_CONTENT) return;
+    const previous = getStoredJson(COMMERCIAL_HEADER_KEY)?.text || null;
+    const next = pickNonRepeating(BOSS_CONTENT.commercialsHeaders, previous);
+    if (!next) return;
+    commercialsHeader.textContent = next;
+    setStoredJson(COMMERCIAL_HEADER_KEY, { text: next, updatedAt: Date.now() });
+  }
+
+  if (commercialsHeader && window.BOSS_CONTENT) {
+    refreshCommercialsHeader();
+  }
+
   const sharedScoreRoot = document.getElementById("sharedScoreRoot");
   if (sharedScoreRoot) {
     (async () => {
@@ -408,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const sig = params.get("s") || "";
 
       const ok = await verifySignedScore(level, sig);
-
       const sharedNumber = document.getElementById("resultNumber");
       const sharedTier = document.getElementById("resultTier");
       const sharedIcon = document.getElementById("resultIcon");
@@ -416,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sharedToMainBtn = document.getElementById("sharedToMainBtn");
 
       if (!ok) {
-        if (sharedNumber) sharedNumber.textContent = "—";
+        if (sharedNumber) sharedNumber.textContent = "-";
         if (sharedTier) sharedTier.textContent = "INVALID LINK";
         if (sharedIcon) sharedIcon.innerHTML = "";
         if (sharedLabel) sharedLabel.textContent = " ";
@@ -424,7 +379,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const info = tierFor(level);
         if (sharedNumber) sharedNumber.textContent = String(level);
         if (sharedTier) sharedTier.textContent = info.title;
-
         setColor(sharedNumber, info.colorVar);
         setColor(sharedTier, info.colorVar);
 
@@ -436,11 +390,14 @@ document.addEventListener("DOMContentLoaded", () => {
             setColor(svg, info.colorVar);
           }
         }
+
         if (sharedLabel) sharedLabel.textContent = " ";
       }
 
       sharedToMainBtn?.addEventListener("click", () => {
-        try { sessionStorage.setItem("boss_autoroll", "1"); } catch {}
+        try {
+          sessionStorage.setItem("boss_autoroll", "1");
+        } catch {}
         location.href = "./index.html";
       });
     })();
@@ -448,9 +405,148 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // -------------------------
-  // Boss checker
-  // -------------------------
+  const inspirationQuote = document.getElementById("inspirationQuote");
+  const inspirationAuthor = document.getElementById("inspirationAuthor");
+  const inspirationPercent = document.getElementById("inspirationPercent");
+  const inspirationPillBtn = document.getElementById("inspirationPillBtn");
+
+  if (inspirationQuote && inspirationAuthor && inspirationPercent && inspirationPillBtn && window.BOSS_CONTENT) {
+    function updateInspirationUI() {
+      const now = Date.now();
+      const inspiration = getInspirationState(
+        now,
+        INSPIRATION_MS,
+        INSPIRATION_KEY,
+        BOSS_CONTENT.successQuotes
+      );
+
+      const parsedQuote = parseInspirationQuote(inspiration.quote);
+      inspirationQuote.textContent = parsedQuote.quote ? `"${parsedQuote.quote}"` : "";
+      inspirationAuthor.textContent = parsedQuote.author || "";
+      inspirationPercent.textContent = `${inspiration.percent}%`;
+      inspirationPillBtn.classList.toggle("is-ready", inspiration.ready);
+      inspirationPercent.classList.toggle("is-ready", inspiration.ready);
+      inspirationPillBtn.setAttribute("aria-pressed", inspiration.ready ? "true" : "false");
+    }
+
+    function notifyInspirationChanged() {
+      try {
+        inspirationChannel?.postMessage({ type: "inspiration-updated", at: Date.now() });
+      } catch {}
+    }
+
+    inspirationPillBtn.addEventListener("click", () => {
+      const now = Date.now();
+      const current = getInspirationState(
+        now,
+        INSPIRATION_MS,
+        INSPIRATION_KEY,
+        BOSS_CONTENT.successQuotes
+      );
+
+      if (!current.ready) return;
+
+      const availableIndexes = BOSS_CONTENT.successQuotes
+        .map((_, index) => index)
+        .filter((index) => index !== current.quoteIndex);
+      const nextQuoteIndex = availableIndexes.length > 0
+        ? availableIndexes[Math.floor(Math.random() * availableIndexes.length)]
+        : 0;
+
+      setSyncedJson(INSPIRATION_KEY, {
+        quoteIndex: nextQuoteIndex,
+        updatedAt: now
+      });
+      notifyInspirationChanged();
+      updateInspirationUI();
+    });
+
+    updateInspirationUI();
+    setInterval(updateInspirationUI, 1000);
+    window.addEventListener("storage", (event) => {
+      if (event.key === INSPIRATION_KEY) updateInspirationUI();
+    });
+    inspirationChannel?.addEventListener("message", (event) => {
+      if (event?.data?.type === "inspiration-updated") updateInspirationUI();
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") updateInspirationUI();
+    });
+    window.addEventListener("pageshow", updateInspirationUI);
+    window.addEventListener("focus", updateInspirationUI);
+  }
+
+  const commercialsBackBtn = document.getElementById("commercialsBackBtn");
+  const commercialAdsRoot = document.getElementById("commercialAdsRoot");
+  const commercialAdsStatus = document.getElementById("commercialAdsStatus");
+  const otherCommercialsBtn = document.getElementById("otherCommercialsBtn");
+
+  if (commercialsBackBtn) {
+    const savedLevel = getLastSavedBossLevel(RESULT_KEY);
+    commercialsBackBtn.textContent = `Boss Score: ${savedLevel ?? "--"}`;
+  }
+
+  if (commercialAdsRoot && otherCommercialsBtn) {
+    let commercialsCooldownTimer = null;
+    let commercialsCooldownSeconds = 0;
+
+    function updateOtherCommercialsButton() {
+      if (commercialsCooldownSeconds > 0) {
+        otherCommercialsBtn.disabled = true;
+        otherCommercialsBtn.textContent = `Other Boss Commercials (${commercialsCooldownSeconds}s)`;
+        return;
+      }
+
+      otherCommercialsBtn.disabled = false;
+      otherCommercialsBtn.textContent = "Other Boss Commercials";
+    }
+
+    function startCommercialsCooldown() {
+      if (commercialsCooldownTimer) clearInterval(commercialsCooldownTimer);
+      commercialsCooldownSeconds = 3;
+      updateOtherCommercialsButton();
+
+      commercialsCooldownTimer = setInterval(() => {
+        commercialsCooldownSeconds -= 1;
+        if (commercialsCooldownSeconds <= 0) {
+          commercialsCooldownSeconds = 0;
+          clearInterval(commercialsCooldownTimer);
+          commercialsCooldownTimer = null;
+        }
+        updateOtherCommercialsButton();
+      }, 1000);
+    }
+
+    function renderCommercialSlot() {
+      commercialAdsRoot.querySelectorAll("ins.adsbygoogle").forEach((node) => node.remove());
+      const adUnit = document.createElement("ins");
+      adUnit.className = "adsbygoogle commercialAdsUnit";
+      adUnit.style.display = "block";
+      adUnit.setAttribute("data-ad-client", "ca-pub-7548877721858943");
+      adUnit.setAttribute("data-ad-slot", "1234567890");
+      adUnit.setAttribute("data-ad-format", "auto");
+      adUnit.setAttribute("data-full-width-responsive", "true");
+      commercialAdsRoot.appendChild(adUnit);
+
+      if (commercialAdsStatus) {
+        commercialAdsStatus.textContent = getConsent() === "granted"
+          ? "Ad slot"
+          : "Ad slot";
+      }
+
+      tryRenderAds();
+      refreshCommercialsHeader();
+    }
+
+    renderCommercialSlot();
+    updateOtherCommercialsButton();
+    otherCommercialsBtn.addEventListener("click", () => {
+      if (otherCommercialsBtn.disabled) return;
+      renderCommercialSlot();
+      startCommercialsCooldown();
+    });
+  }
+
   const checkBtn = document.getElementById("checkBtn");
   if (!checkBtn) return;
 
@@ -466,8 +562,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnIcon = document.getElementById("btnIcon");
   const btnText = document.getElementById("btnText");
   const resultShareBtn = document.getElementById("resultShareBtn");
+  const shareModal = document.getElementById("shareModal");
+  const shareClose = document.getElementById("shareClose");
+  const shareSiteLinkBtn = document.getElementById("shareSiteLinkBtn");
+  const shareBossScoreBtn = document.getElementById("shareBossScoreBtn");
 
   let cooldownTimer = null;
+  let timer = null;
 
   function updateCooldownUI() {
     const last = getLastCheck();
@@ -502,23 +603,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setAnimating(isAnimating) {
     if (isAnimating) checkBtn.disabled = true;
-
     if (btnText) btnText.textContent = isAnimating ? "Checking..." : "Check My Boss Level";
 
     if (btnIcon) {
-      if (isAnimating) {
-        btnIcon.innerHTML = ICONS.autoAwesome;
-        btnIcon.querySelector("svg")?.classList.add("spin");
-      } else {
-        btnIcon.innerHTML = ICONS.centerFocusStrong;
-        btnIcon.querySelector("svg")?.classList.remove("spin");
-      }
+      btnIcon.innerHTML = isAnimating ? ICONS.autoAwesome : ICONS.centerFocusStrong;
+      btnIcon.querySelector("svg")?.classList.toggle("spin", isAnimating);
     }
   }
 
   function showResult(level) {
-    resultShareBtn?.classList.remove("hidden");
     currentLevel = level;
+    resultShareBtn?.classList.remove("hidden");
 
     if (bossImage) {
       bossImage.removeAttribute("src");
@@ -527,10 +622,8 @@ document.addEventListener("DOMContentLoaded", () => {
     result?.classList.remove("hasImage");
 
     const info = tierFor(level);
-
     if (resultNumber) resultNumber.textContent = String(level);
     if (resultTier) resultTier.textContent = info.title;
-
     setColor(resultNumber, info.colorVar);
     setColor(resultTier, info.colorVar);
 
@@ -551,7 +644,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resultShareBtn?.classList.add("hidden");
 
     const info = tierFor(level);
-
     if (bossImage) {
       bossImage.removeAttribute("src");
       bossImage.classList.add("hidden");
@@ -560,7 +652,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (resultNumber) resultNumber.textContent = String(level);
     if (resultTier) resultTier.textContent = info.title;
-
     setColor(resultNumber, info.colorVar);
     setColor(resultTier, info.colorVar);
 
@@ -578,21 +669,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!progressBlock || !progressValue || !progressFill) return;
 
     progressBlock.classList.remove("hidden");
-
     const clamped = Math.max(0, Math.min(100, Math.round(value)));
     progressValue.textContent = String(clamped);
 
     const info = tierFor(clamped);
     const color = getComputedStyle(document.documentElement).getPropertyValue(info.colorVar).trim() || "";
     progressValue.style.color = color;
-    progressFill.style.background = color || "";
+    progressFill.style.background = color;
     progressFill.style.width = `${clamped}%`;
   }
 
   function renderFunny(text) {
     if (!progressBlock) return;
-
-    progressBlock.querySelectorAll(".bossFunny").forEach((n) => n.remove());
+    progressBlock.querySelectorAll(".bossFunny").forEach((node) => node.remove());
     if (!text) return;
 
     const funny = document.createElement("div");
@@ -603,8 +692,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function saveLastResult(level, funnyText) {
     try {
-      localStorage.setItem(RESULT_KEY, JSON.stringify({ level, funnyText }));
-      sessionStorage.setItem(RESULT_KEY, JSON.stringify({ level, funnyText }));
+      const payload = JSON.stringify({ level, funnyText });
+      localStorage.setItem(RESULT_KEY, payload);
+      sessionStorage.setItem(RESULT_KEY, payload);
     } catch {}
   }
 
@@ -625,28 +715,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (btnIcon) btnIcon.innerHTML = ICONS.centerFocusStrong;
-  updateCooldownUI();
-  startCooldownTicker();
-
-  restoreLastResult();
-
-  try {
-    if (sessionStorage.getItem("boss_autoroll") === "1") {
-      sessionStorage.removeItem("boss_autoroll");
-      setTimeout(() => {
-        checkBtn.click();
-      }, 0);
-    }
-  } catch {}
-
   async function shareBossScore(level) {
     if (!Number.isFinite(level) || level < 1 || level > 100) return;
 
     const url = await makeSignedScoreUrl(level);
     const info = tierFor(level);
     const emoji = shareEmojiFor(level);
-    const text = `${emoji} I rolled ${level} — ${info.title}`;
+    const text = `${emoji} I rolled ${level} - ${info.title}`;
 
     if (navigator.share) {
       try {
@@ -661,22 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch {
       prompt("Copy this:", payload);
     }
-  }
-
-  const shareModal = document.getElementById("shareModal");
-  const shareClose = document.getElementById("shareClose");
-  const shareSiteLinkBtn = document.getElementById("shareSiteLinkBtn");
-  const shareBossScoreBtn = document.getElementById("shareBossScoreBtn");
-
-  function openShareModal() {
-    if (!shareModal) return;
-    const hasScore = Number.isFinite(currentLevel) && currentLevel >= 1 && currentLevel <= 100;
-    shareBossScoreBtn?.classList.toggle("hidden", !hasScore);
-    shareModal.classList.remove("hidden");
-  }
-
-  function closeShareModal() {
-    shareModal?.classList.add("hidden");
   }
 
   async function shareSiteLink() {
@@ -698,15 +757,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  resultShareBtn?.addEventListener("click", async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  function openShareModal() {
+    if (!shareModal) return;
+    const hasScore = Number.isFinite(currentLevel) && currentLevel >= 1 && currentLevel <= 100;
+    shareBossScoreBtn?.classList.toggle("hidden", !hasScore);
+    shareModal.classList.remove("hidden");
+  }
+
+  function closeShareModal() {
+    shareModal?.classList.add("hidden");
+  }
+
+  if (btnIcon) btnIcon.innerHTML = ICONS.centerFocusStrong;
+  updateCooldownUI();
+  startCooldownTicker();
+  restoreLastResult();
+
+  try {
+    if (sessionStorage.getItem("boss_autoroll") === "1") {
+      sessionStorage.removeItem("boss_autoroll");
+      setTimeout(() => {
+        checkBtn.click();
+      }, 0);
+    }
+  } catch {}
+
+  resultShareBtn?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     openShareModal();
   });
 
   shareClose?.addEventListener("click", closeShareModal);
-  shareModal?.addEventListener("click", (e) => {
-    if (e.target === shareModal) closeShareModal();
+  shareModal?.addEventListener("click", (event) => {
+    if (event.target === shareModal) closeShareModal();
   });
 
   shareSiteLinkBtn?.addEventListener("click", async () => {
@@ -718,8 +802,6 @@ document.addEventListener("DOMContentLoaded", () => {
     await shareBossScore(currentLevel);
     closeShareModal();
   });
-
-  let timer = null;
 
   checkBtn.addEventListener("click", () => {
     const last = getLastCheck();
@@ -733,7 +815,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const level = rollBossLinearWeights();
-
     setLastCheck(now);
     updateCooldownUI();
     startCooldownTicker();
@@ -744,7 +825,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     setAnimating(true);
-
     placeholder?.classList.add("hidden");
     result?.classList.remove("hidden");
     result?.classList.remove("hasImage");
@@ -759,8 +839,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const duration = 720;
     const start = performance.now();
 
-    function tick(t) {
-      const p = Math.min(1, (t - start) / duration);
+    function tick(timestamp) {
+      const p = Math.min(1, (timestamp - start) / duration);
       const eased = 1 - Math.pow(1 - p, 1.3);
       const current = Math.floor(level * eased);
       setProgress(current);
@@ -772,19 +852,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setProgress(level);
-
       showResult(level);
+
       const tierKey = tierFor(level).title.replace(/\s*BOSS/i, "").toLowerCase();
-      const arr = FUNNY_TEXTS[tierKey] || [];
-      const funnyText = (arr[Math.floor(Math.random() * arr.length)] || "");
+      const funnyTexts = window.BOSS_CONTENT?.funnyTexts?.[tierKey] || [];
+      const lastFunnyText = getStoredJson(RESULT_KEY)?.funnyText || null;
+      const funnyText = pickNonRepeating(funnyTexts, lastFunnyText);
 
       renderFunny(funnyText);
-
       saveLastResult(level, funnyText);
 
       setAnimating(false);
       timer = null;
-
       updateCooldownUI();
     }
 
