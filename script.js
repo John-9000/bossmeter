@@ -240,8 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const RESULT_KEY = "boss_last_result";
   const INSPIRATION_KEY = "boss_inspiration";
   const COMMERCIAL_HEADER_KEY = "boss_commercial_header";
-  const CONSENT_KEY = "boss_cookie_consent";
-  const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
+  const ADSENSE_CLIENT = "ca-pub-7548877721858943";
+  const COMMERCIAL_AD_SLOT = "7206642021";
   const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
   const inspirationChannel = "BroadcastChannel" in window
     ? new BroadcastChannel("boss_inspiration_sync")
@@ -260,31 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, String(ms));
   }
 
-  function getCookie(name) {
-    try {
-      const m = document.cookie.match(new RegExp(`(?:^|; )${name.replace(/[.$?*|{}()[\]\\/+^]/g, "\\$&")}=([^;]*)`));
-      return m ? decodeURIComponent(m[1]) : null;
-    } catch {
-      return null;
-    }
-  }
-
-  function setCookie(name, value, days) {
-    try {
-      const maxAge = days ? `; max-age=${days * 24 * 60 * 60}` : "";
-      document.cookie = `${name}=${encodeURIComponent(value)}${maxAge}; path=/; samesite=lax`;
-    } catch {}
-  }
-
-  function getConsent() {
-    return localStorage.getItem(CONSENT_KEY) || getCookie(CONSENT_KEY);
-  }
-
-  function setConsent(value) {
-    localStorage.setItem(CONSENT_KEY, value);
-    setCookie(CONSENT_KEY, value, 365);
-  }
-
   function loadAdSenseOnce() {
     if (adsenseLoaded) return;
     if (document.querySelector('script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
@@ -301,7 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function tryRenderAds() {
-    if (getConsent() !== "granted") return;
     loadAdSenseOnce();
 
     const units = document.querySelectorAll("ins.adsbygoogle");
@@ -311,34 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     });
   }
-
-  const cookieBanner = document.getElementById("cookieBanner");
-  const cookieAccept = document.getElementById("cookieAccept");
-  const cookieDecline = document.getElementById("cookieDecline");
-
-  function showCookieBanner(show) {
-    if (!cookieBanner) return;
-    cookieBanner.classList.toggle("hidden", !show);
-  }
-
-  const consent = getConsent();
-  if (consent !== "granted" && consent !== "denied") {
-    showCookieBanner(true);
-  } else {
-    showCookieBanner(false);
-    if (consent === "granted") loadAdSenseOnce();
-  }
-
-  cookieAccept?.addEventListener("click", () => {
-    setConsent("granted");
-    showCookieBanner(false);
-    tryRenderAds();
-  });
-
-  cookieDecline?.addEventListener("click", () => {
-    setConsent("denied");
-    showCookieBanner(false);
-  });
 
   tryRenderAds();
 
@@ -522,16 +468,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const adUnit = document.createElement("ins");
       adUnit.className = "adsbygoogle commercialAdsUnit";
       adUnit.style.display = "block";
-      adUnit.setAttribute("data-ad-client", "ca-pub-7548877721858943");
-      adUnit.setAttribute("data-ad-slot", "1234567890");
+      adUnit.setAttribute("data-ad-client", ADSENSE_CLIENT);
+      adUnit.setAttribute("data-ad-slot", COMMERCIAL_AD_SLOT);
       adUnit.setAttribute("data-ad-format", "auto");
       adUnit.setAttribute("data-full-width-responsive", "true");
       commercialAdsRoot.appendChild(adUnit);
 
       if (commercialAdsStatus) {
-        commercialAdsStatus.textContent = getConsent() === "granted"
-          ? "Ad slot"
-          : "Ad slot";
+        commercialAdsStatus.textContent = "Ad slot";
       }
 
       tryRenderAds();
