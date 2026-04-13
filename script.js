@@ -240,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const RESULT_KEY = "boss_last_result";
   const INSPIRATION_KEY = "boss_inspiration";
   const COMMERCIAL_HEADER_KEY = "boss_commercial_header";
+  const ADS_CONSENT_KEY = "boss_ads_consent_v1";
   const ADSENSE_CLIENT = "ca-pub-7548877721858943";
   const ADSENSE_SLOT = "7206642021";
   const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
@@ -258,6 +259,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setLastCheck(ms) {
     localStorage.setItem(STORAGE_KEY, String(ms));
+  }
+
+  function getAdsConsentChoice() {
+    try {
+      const raw = localStorage.getItem(ADS_CONSENT_KEY);
+      return raw === "personalized" || raw === "basic" ? raw : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function setAdsConsentChoice(choice) {
+    try {
+      localStorage.setItem(ADS_CONSENT_KEY, choice);
+    } catch {}
+  }
+
+  function applyAdsConsentChoice(choice) {
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adsbygoogle.requestNonPersonalizedAds = choice === "basic" ? 1 : 0;
   }
 
   function loadAdSenseOnce() {
@@ -476,6 +497,37 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
+    function renderConsentPrompt() {
+      commercialAdsRoot.innerHTML = `
+        <section class="adsConsentCard" aria-label="Advertising consent">
+          <div class="adsConsentEyebrow">Choose your ad mode</div>
+          <h3 class="adsConsentTitle">Pick how Boss Commercials should load</h3>
+          <p class="adsConsentBody">
+            Personalized ads may use more data. Basic ads use less personalization and may work better when consent is required.
+          </p>
+          <div class="adsConsentActions">
+            <button class="outlinePillBtn adsConsentBtn" id="adsConsentBasicBtn" type="button">Basic ads</button>
+            <button class="outlinePillBtn adsConsentBtn adsConsentBtn--primary" id="adsConsentPersonalizedBtn" type="button">Personalized ads</button>
+          </div>
+        </section>
+      `;
+
+      const basicBtn = document.getElementById("adsConsentBasicBtn");
+      const personalizedBtn = document.getElementById("adsConsentPersonalizedBtn");
+
+      basicBtn?.addEventListener("click", () => {
+        setAdsConsentChoice("basic");
+        applyAdsConsentChoice("basic");
+        renderCommercialSlot();
+      });
+
+      personalizedBtn?.addEventListener("click", () => {
+        setAdsConsentChoice("personalized");
+        applyAdsConsentChoice("personalized");
+        renderCommercialSlot();
+      });
+    }
+
     function scheduleCommercialFallback(renderToken) {
       window.setTimeout(() => {
         if (renderToken !== commercialsRenderToken) return;
@@ -488,6 +540,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderCommercialSlot() {
+      const consentChoice = getAdsConsentChoice();
+      if (!consentChoice) {
+        renderConsentPrompt();
+        return;
+      }
+
+      applyAdsConsentChoice(consentChoice);
       commercialsRenderToken += 1;
       const renderToken = commercialsRenderToken;
 

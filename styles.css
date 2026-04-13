@@ -800,6 +800,59 @@ a.checkBtn{ text-decoration:none; }
   font-weight: 800;
 }
 
+.adsConsentCard{
+  width: 100%;
+  min-height: 280px;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(15,23,42,0.92), rgba(12,18,31,0.98));
+  border: 1px solid rgba(148,163,184,0.2);
+}
+
+.adsConsentEyebrow{
+  color: rgba(191,219,254,0.9);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.adsConsentTitle{
+  margin: 0;
+  color: rgba(248,250,252,0.98);
+  font-size: clamp(22px, 4vw, 28px);
+  line-height: 1.12;
+}
+
+.adsConsentBody{
+  margin: 0;
+  color: rgba(226,232,240,0.84);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.adsConsentActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.adsConsentBtn{
+  margin-left: 0;
+}
+
+.adsConsentBtn--primary{
+  background: rgba(96,165,250,0.16);
+  border-color: rgba(147,197,253,0.4);
+}
+
 .commercialActions{
   margin-top: 12px;
   display: flex;
