@@ -445,6 +445,36 @@ const BOSS_CONTENT = {
     "This advertisement says circle back a lot",
     "The sponsors are smiling with deck intensity",
     "A commercial just CC'd the entire universe"
+  ],
+  fallbackCommercials: [
+    {
+      badge: "Boss Tip",
+      title: "Upgrade your meeting presence",
+      body: "Pause for one beat before answering. It makes even a regular sentence sound suspiciously strategic.",
+      cta: "Back to Boss Meter",
+      href: "./index.html"
+    },
+    {
+      badge: "Boss Meter App",
+      title: "Take the boss energy with you",
+      body: "Open Boss Meter on Google Play and keep the dramatic score checks close at hand.",
+      cta: "Open on Google Play",
+      href: "https://play.google.com/store/apps/details?id=uk.co.bossdeboss.bossmeter"
+    },
+    {
+      badge: "Boss Advice",
+      title: "Use fewer words, sound more certain",
+      body: "Swap long explanations for a short answer and a calm nod. The printer will respect you immediately.",
+      cta: "Roll another score",
+      href: "./index.html"
+    },
+    {
+      badge: "Executive Reminder",
+      title: "Hydration is leadership",
+      body: "A glass of water on the desk adds just enough mysterious authority to your next decision.",
+      cta: "Check your boss level",
+      href: "./index.html"
+    }
   ]
 };
 
