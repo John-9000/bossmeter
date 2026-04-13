@@ -171,13 +171,13 @@ function getInspirationState(now, durationMs, storageKey, quotes) {
 
   if (!storedQuote || !Number.isFinite(storedUpdatedAt)) {
     const initial = {
-      quoteIndex: 0,
+      quoteIndex: -1,
       updatedAt: now - durationMs
     };
     setSyncedJson(storageKey, initial);
     return {
-      quote: quotes[0],
-      quoteIndex: 0,
+      quote: "",
+      quoteIndex: -1,
       updatedAt: initial.updatedAt,
       percent: 100,
       ready: true
@@ -241,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const INSPIRATION_KEY = "boss_inspiration";
   const COMMERCIAL_HEADER_KEY = "boss_commercial_header";
   const ADSENSE_CLIENT = "ca-pub-7548877721858943";
-  const COMMERCIAL_AD_SLOT = "7206642021";
   const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
   const inspirationChannel = "BroadcastChannel" in window
     ? new BroadcastChannel("boss_inspiration_sync")
@@ -394,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const availableIndexes = BOSS_CONTENT.successQuotes
         .map((_, index) => index)
-        .filter((index) => index !== current.quoteIndex);
+        .filter((index) => current.quoteIndex < 0 || index !== current.quoteIndex);
       const nextQuoteIndex = availableIndexes.length > 0
         ? availableIndexes[Math.floor(Math.random() * availableIndexes.length)]
         : 0;
@@ -424,7 +423,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const commercialsBackBtn = document.getElementById("commercialsBackBtn");
   const commercialAdsRoot = document.getElementById("commercialAdsRoot");
-  const commercialAdsStatus = document.getElementById("commercialAdsStatus");
   const otherCommercialsBtn = document.getElementById("otherCommercialsBtn");
 
   if (commercialsBackBtn) {
@@ -463,30 +461,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1000);
     }
 
-    function renderCommercialSlot() {
-      commercialAdsRoot.querySelectorAll("ins.adsbygoogle").forEach((node) => node.remove());
-      const adUnit = document.createElement("ins");
-      adUnit.className = "adsbygoogle commercialAdsUnit";
-      adUnit.style.display = "block";
-      adUnit.setAttribute("data-ad-client", ADSENSE_CLIENT);
-      adUnit.setAttribute("data-ad-slot", COMMERCIAL_AD_SLOT);
-      adUnit.setAttribute("data-ad-format", "auto");
-      adUnit.setAttribute("data-full-width-responsive", "true");
-      commercialAdsRoot.appendChild(adUnit);
-
-      if (commercialAdsStatus) {
-        commercialAdsStatus.textContent = "Ad slot";
-      }
-
-      tryRenderAds();
-      refreshCommercialsHeader();
-    }
-
-    renderCommercialSlot();
+    tryRenderAds();
     updateOtherCommercialsButton();
     otherCommercialsBtn.addEventListener("click", () => {
       if (otherCommercialsBtn.disabled) return;
-      renderCommercialSlot();
+      refreshCommercialsHeader();
       startCommercialsCooldown();
     });
   }

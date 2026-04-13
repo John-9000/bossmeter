@@ -738,14 +738,6 @@ a.checkBtn{ text-decoration:none; }
   gap: 14px;
 }
 
-.commercialAdsStatus{
-  max-width: 36ch;
-  color: rgba(148,163,184,0.84);
-  font-size: 12px;
-  line-height: 1.45;
-  text-align: center;
-}
-
 .commercialAdsUnit{
   width: 100% !important;
   min-height: 280px;
