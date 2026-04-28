@@ -15,14 +15,11 @@
           <a class="scoreBackBtn" id="commercialsBackBtn" href="./index.html">Boss Score: --</a>
         </div>
 
-        <h1 class="title" style="margin-top:14px; text-align:center;">About &amp; Commercials</h1>
-        <p class="adsSubtitle" id="commercialsHeader">A brief commercial intermission for your boss journey</p>
+        <section aria-label="About Boss Meter" style="margin-top:14px;">
+          <h1 class="title" style="margin-top:14px; text-align:center;">About Boss Meter app</h1>
 
-        <section aria-label="About Boss Commercials" style="margin-top:14px;">
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55; margin-bottom:10px;">
-            Boss Commercials are optional advertising moments connected to the Boss Meter experience.
-            The goal is to support the free version of Boss Meter without interrupting the main score roll,
-            boss tier results, history, or inspiration features.
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            Boss Meter is a fun, lightweight mobile app created for entertainment.
           </p>
 
           <section class="commercialCard" aria-label="Advertisement">
@@ -35,6 +32,103 @@
           <div class="commercialActions commercialActions--underAd">
             <button class="outlinePillBtn" id="otherCommercialsBtn" type="button">Other Boss Commercials</button>
           </div>
+
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            It generates a randomized "boss level" score designed to be playful and
+            motivational, not a scientific, psychological, or professional assessment.
+            Refined ad experience - no interruptions, even in the free version ads appear only when you choose, and in the premium version ads can be removed completely.
+          </p>
+
+          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+            Free version includes:
+          </p>
+          <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
+            <li>Boss score rolls &amp; tier system</li>
+            <li>2 Boss themes (Classic, Gold)</li>
+            <li>History</li>
+            <li>Boss Commercials (non-intrusive)</li>
+            <li>Timer-end notifications</li>
+          </ul>
+
+          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+            Premium version unlocks:
+          </p>
+          <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
+            <li>6 additional Boss themes (White, Purple, Silver, Midnight, Ocean, Azure)</li>
+            <li>Instant roll &amp; custom roll timer</li>
+            <li>Extended history</li>
+            <li>Ad-free option &amp; premium Boss visuals</li>
+          </ul>
+
+          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
+            Boss Inspiration button
+          </p>
+
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            Provides a quote from a well-known successful figure once every twelve hours.
+            Quotes are collected from public sources and are attributed to their respective
+            authors. Some quotes may be paraphrased.
+          </p>
+
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            Boss Meter does not require an account and does not directly collect personal
+            information. The app may display ads provided by third-party services
+            (such as Google AdMob), which may collect data in accordance with their own
+            privacy policies.
+          </p>
+
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            All results are for entertainment purposes only and should not be interpreted
+            as advice of any kind.
+          </p>
+
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
+            Enjoy Boss Meter.
+          </p>
+        </section>
+
+        <div class="appPromoCard appPromoCard--commercials">
+          <a
+            class="appStoreBtn"
+            href="https://play.google.com/store/apps/details?id=uk.co.bossdeboss.bossmeter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="appStoreBtnInner">
+              <span class="appStoreIcon" aria-hidden="true">
+                <img class="appStoreIconImg" src="./assets/google-play-icon.png" alt="" />
+              </span>
+              <span class="appStoreTitle">Get Boss Meter on Google Play</span>
+            </span>
+          </a>
+        </div>
+
+        <section class="inspirationCard" aria-label="Boss Inspiration">
+          <div class="inspirationQuoteBlock">
+            <p class="inspirationQuote" id="inspirationQuote">Loading quote...</p>
+            <p class="inspirationAuthor" id="inspirationAuthor"></p>
+          </div>
+          <div class="inspirationControl">
+            <button class="inspirationPillBtn" id="inspirationPillBtn" type="button">
+              <span class="inspirationPillLabel">Boss Inspiration</span>
+              <span class="inspirationPercent" id="inspirationPercent">0%</span>
+            </button>
+            <p class="inspirationReadyHint" id="inspirationReadyHint" hidden>Press for today's Boss wisdom</p>
+          </div>
+        </section>
+
+        <h2 style="font-size:22px; line-height:1.2; margin:18px 0 10px; color:rgba(248,250,252,0.96); text-align:center;">
+          Commercials
+        </h2>
+        <p class="adsSubtitle" id="commercialsHeader">A brief commercial intermission for your boss journey</p>
+
+        <section aria-label="About Boss Commercials" style="margin-top:14px;">
+          <p style="color: rgba(226,232,240,0.92); line-height:1.55; margin-bottom:10px;">
+            Boss Commercials are optional advertising moments connected to the Boss Meter experience.
+            The goal is to support the free version of Boss Meter without interrupting the main score roll,
+            boss tier results, history, or inspiration features.
+          </p>
+
           <p style="color: rgba(226,232,240,0.92); line-height:1.55; margin-bottom:10px;">
             Instead of placing advertisements everywhere, Boss Meter keeps them in a dedicated commercials
             area. This means users can enjoy the main Boss Meter experience first, then choose whether they
@@ -98,99 +192,6 @@
           <p style="color: rgba(226,232,240,0.92); line-height:1.55; margin-bottom:0;">
             <strong>Where can I learn more about privacy?</strong><br />
             You can read the Boss Meter privacy policy using the footer link at the bottom of this page.
-          </p>
-        </section>
-
-        <div class="appPromoCard appPromoCard--commercials">
-          <a
-            class="appStoreBtn"
-            href="https://play.google.com/store/apps/details?id=uk.co.bossdeboss.bossmeter"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="appStoreBtnInner">
-              <span class="appStoreIcon" aria-hidden="true">
-                <img class="appStoreIconImg" src="./assets/google-play-icon.png" alt="" />
-              </span>
-              <span class="appStoreTitle">Get Boss Meter on Google Play</span>
-            </span>
-          </a>
-        </div>
-
-        <section class="inspirationCard" aria-label="Boss Inspiration">
-          <div class="inspirationQuoteBlock">
-            <p class="inspirationQuote" id="inspirationQuote">Loading quote...</p>
-            <p class="inspirationAuthor" id="inspirationAuthor"></p>
-          </div>
-          <div class="inspirationControl">
-            <button class="inspirationPillBtn" id="inspirationPillBtn" type="button">
-              <span class="inspirationPillLabel">Boss Inspiration</span>
-              <span class="inspirationPercent" id="inspirationPercent">0%</span>
-            </button>
-            <p class="inspirationReadyHint" id="inspirationReadyHint" hidden>Press for today's Boss wisdom</p>
-          </div>
-        </section>
-
-        <section aria-label="About Boss Meter" style="margin-top:14px;">
-          <h2 style="font-size:22px; line-height:1.2; margin:0 0 12px; color:rgba(248,250,252,0.96); text-align:center;">
-            About Boss Meter app
-          </h2>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            Boss Meter is a fun, lightweight mobile app created for entertainment.
-          </p>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            It generates a randomized "boss level" score designed to be playful and
-            motivational, not a scientific, psychological, or professional assessment.
-            Refined ad experience - no interruptions, even in the free version ads appear only when you choose, and in the premium version ads can be removed completely.
-          </p>
-
-          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
-            Free version includes:
-          </p>
-          <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
-            <li>Boss score rolls &amp; tier system</li>
-            <li>2 Boss themes (Classic, Gold)</li>
-            <li>History</li>
-            <li>Boss Commercials (non-intrusive)</li>
-            <li>Timer-end notifications</li>
-          </ul>
-
-          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
-            Premium version unlocks:
-          </p>
-          <ul style="color: rgba(226,232,240,0.92); line-height:1.55; padding-left: 20px; margin-top:0;">
-            <li>6 additional Boss themes (White, Purple, Silver, Midnight, Ocean, Azure)</li>
-            <li>Instant roll &amp; custom roll timer</li>
-            <li>Extended history</li>
-            <li>Ad-free option &amp; premium Boss visuals</li>
-          </ul>
-
-          <p style="font-weight:700; margin-top:18px; margin-bottom:8px;">
-            Boss Inspiration button
-          </p>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            Provides a quote from a well-known successful figure once every twelve hours.
-            Quotes are collected from public sources and are attributed to their respective
-            authors. Some quotes may be paraphrased.
-          </p>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            Boss Meter does not require an account and does not directly collect personal
-            information. The app may display ads provided by third-party services
-            (such as Google AdMob), which may collect data in accordance with their own
-            privacy policies.
-          </p>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            All results are for entertainment purposes only and should not be interpreted
-            as advice of any kind.
-          </p>
-
-          <p style="color: rgba(226,232,240,0.92); line-height:1.55;">
-            Enjoy Boss Meter.
           </p>
         </section>
       </section>
