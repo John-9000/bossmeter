@@ -235,7 +235,7 @@ function getLastSavedBossLevel(resultKey) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const COOLDOWN_MS = 1 * 60 * 60 * 1000;
-  const INSPIRATION_MS = 6 * 60 * 60 * 1000;
+  const INSPIRATION_MS = 12 * 60 * 60 * 1000;
   const STORAGE_KEY = "boss_last_check_ms";
   const RESULT_KEY = "boss_last_result";
   const INSPIRATION_KEY = "boss_inspiration";
@@ -388,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inspirationAuthor = document.getElementById("inspirationAuthor");
   const inspirationPercent = document.getElementById("inspirationPercent");
   const inspirationPillBtn = document.getElementById("inspirationPillBtn");
+  const inspirationReadyHint = document.getElementById("inspirationReadyHint");
 
   if (inspirationQuote && inspirationAuthor && inspirationPercent && inspirationPillBtn && window.BOSS_CONTENT) {
     function updateInspirationUI() {
@@ -405,6 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
       inspirationPercent.textContent = `${inspiration.percent}%`;
       inspirationPillBtn.classList.toggle("is-ready", inspiration.ready);
       inspirationPercent.classList.toggle("is-ready", inspiration.ready);
+      if (inspirationReadyHint) inspirationReadyHint.hidden = !inspiration.ready;
       inspirationPillBtn.setAttribute("aria-pressed", inspiration.ready ? "true" : "false");
     }
 
