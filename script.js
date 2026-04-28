@@ -576,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (btnText && btnText.textContent !== "Checking...") {
-      btnText.textContent = "Check My Boss Level";
+      btnText.textContent = "Roll Boss Level";
     }
     checkBtn.disabled = false;
     return false;
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setAnimating(isAnimating) {
     if (isAnimating) checkBtn.disabled = true;
-    if (btnText) btnText.textContent = isAnimating ? "Checking..." : "Check My Boss Level";
+    if (btnText) btnText.textContent = isAnimating ? "Checking..." : "Roll Boss Level";
 
     if (btnIcon) {
       btnIcon.innerHTML = isAnimating ? ICONS.autoAwesome : ICONS.centerFocusStrong;
