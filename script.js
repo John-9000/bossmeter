@@ -213,42 +213,17 @@ function parseInspirationQuote(raw) {
   };
 }
 
-function getLastSavedBossLevel(resultKey) {
-  const local = getStoredJson(resultKey);
-  const session = (() => {
-    try {
-      const raw = sessionStorage.getItem(resultKey);
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
-  })();
-
-  const localLevel = Number(local?.level);
-  if (Number.isFinite(localLevel) && localLevel >= 1 && localLevel <= 100) return localLevel;
-
-  const sessionLevel = Number(session?.level);
-  if (Number.isFinite(sessionLevel) && sessionLevel >= 1 && sessionLevel <= 100) return sessionLevel;
-
-  return null;
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const COOLDOWN_MS = 1 * 60 * 60 * 1000;
   const INSPIRATION_MS = 12 * 60 * 60 * 1000;
   const STORAGE_KEY = "boss_last_check_ms";
   const RESULT_KEY = "boss_last_result";
   const INSPIRATION_KEY = "boss_inspiration";
-  const COMMERCIAL_HEADER_KEY = "boss_commercial_header";
-  const ADSENSE_CLIENT = "ca-pub-7548877721858943";
-  const ADSENSE_SLOT = "7206642021";
-  const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
   const inspirationChannel = "BroadcastChannel" in window
     ? new BroadcastChannel("boss_inspiration_sync")
     : null;
 
   let currentLevel = null;
-  let adsenseLoaded = false;
 
   function getLastCheck() {
     const v = localStorage.getItem(STORAGE_KEY);
@@ -258,58 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setLastCheck(ms) {
     localStorage.setItem(STORAGE_KEY, String(ms));
-  }
-
-  function loadAdSenseOnce() {
-    if (adsenseLoaded) return;
-    if (document.querySelector('script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
-      adsenseLoaded = true;
-      return;
-    }
-
-    adsenseLoaded = true;
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = ADSENSE_SRC;
-    script.crossOrigin = "anonymous";
-    document.head.appendChild(script);
-  }
-
-  function tryRenderAds() {
-    loadAdSenseOnce();
-
-    const units = document.querySelectorAll("ins.adsbygoogle");
-    units.forEach((unit) => {
-      if (unit.getAttribute("data-ads-init") === "1") return;
-      unit.setAttribute("data-ads-init", "1");
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  }
-
-  function createCommercialAdUnit() {
-    const unit = document.createElement("ins");
-    unit.className = "adsbygoogle commercialAdsUnit";
-    unit.id = "commercialAdsUnit";
-    unit.style.display = "block";
-    unit.setAttribute("data-ad-client", ADSENSE_CLIENT);
-    unit.setAttribute("data-ad-slot", ADSENSE_SLOT);
-    unit.setAttribute("data-ad-format", "auto");
-    unit.setAttribute("data-full-width-responsive", "true");
-    return unit;
-  }
-
-  const commercialsHeader = document.getElementById("commercialsHeader");
-  function refreshCommercialsHeader() {
-    if (!commercialsHeader || !window.BOSS_CONTENT) return;
-    const previous = getStoredJson(COMMERCIAL_HEADER_KEY)?.text || null;
-    const next = pickNonRepeating(BOSS_CONTENT.commercialsHeaders, previous);
-    if (!next) return;
-    commercialsHeader.textContent = next;
-    setStoredJson(COMMERCIAL_HEADER_KEY, { text: next, updatedAt: Date.now() });
-  }
-
-  if (commercialsHeader && window.BOSS_CONTENT) {
-    refreshCommercialsHeader();
   }
 
   const sharedScoreRoot = document.getElementById("sharedScoreRoot");
@@ -432,111 +355,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     window.addEventListener("pageshow", updateInspirationUI);
     window.addEventListener("focus", updateInspirationUI);
-  }
-
-  const commercialsBackBtn = document.getElementById("commercialsBackBtn");
-  const commercialAdsRoot = document.getElementById("commercialAdsRoot");
-  const otherCommercialsBtn = document.getElementById("otherCommercialsBtn");
-
-  if (commercialsBackBtn) {
-    const savedLevel = getLastSavedBossLevel(RESULT_KEY);
-    commercialsBackBtn.textContent = `Boss Score: ${savedLevel ?? "--"}`;
-  }
-
-  if (commercialAdsRoot && otherCommercialsBtn) {
-    let commercialsCooldownTimer = null;
-    let commercialsCooldownSeconds = 0;
-    let commercialFallbackIndex = -1;
-    let commercialsRenderToken = 0;
-
-    function getNextFallbackCommercial() {
-      const items = window.BOSS_CONTENT?.fallbackCommercials;
-      if (!Array.isArray(items) || items.length === 0) return null;
-      commercialFallbackIndex = (commercialFallbackIndex + 1) % items.length;
-      return items[commercialFallbackIndex];
-    }
-
-    function renderFallbackCommercial() {
-      const item = getNextFallbackCommercial();
-      if (!item) return;
-
-      commercialAdsRoot.innerHTML = `
-        <article class="fallbackCommercial" aria-label="${item.badge}">
-          <div class="fallbackCommercialBadge">${item.badge}</div>
-          <h3 class="fallbackCommercialTitle">${item.title}</h3>
-          <p class="fallbackCommercialBody">${item.body}</p>
-          <a
-            class="fallbackCommercialBtn"
-            href="${item.href}"
-            ${/^https?:/i.test(item.href) ? 'target="_blank" rel="noopener noreferrer"' : ""}
-          >
-            ${item.cta}
-          </a>
-        </article>
-      `;
-    }
-
-    function scheduleCommercialFallback(renderToken) {
-      window.setTimeout(() => {
-        if (renderToken !== commercialsRenderToken) return;
-        const activeUnit = commercialAdsRoot.querySelector("ins.adsbygoogle");
-        const adFrame = activeUnit?.querySelector("iframe") || commercialAdsRoot.querySelector("iframe");
-        const adStatus = activeUnit?.getAttribute("data-ad-status");
-        if (adFrame || adStatus === "filled") return;
-        renderFallbackCommercial();
-      }, 1800);
-    }
-
-    function renderCommercialSlot() {
-      commercialsRenderToken += 1;
-      const renderToken = commercialsRenderToken;
-
-      commercialAdsRoot.innerHTML = "";
-      commercialAdsRoot.appendChild(createCommercialAdUnit());
-
-      try {
-        tryRenderAds();
-        scheduleCommercialFallback(renderToken);
-      } catch {
-        renderFallbackCommercial();
-      }
-    }
-
-    function updateOtherCommercialsButton() {
-      if (commercialsCooldownSeconds > 0) {
-        otherCommercialsBtn.disabled = true;
-        otherCommercialsBtn.textContent = `Other Boss Commercials (${commercialsCooldownSeconds}s)`;
-        return;
-      }
-
-      otherCommercialsBtn.disabled = false;
-      otherCommercialsBtn.textContent = "Other Boss Commercials";
-    }
-
-    function startCommercialsCooldown() {
-      if (commercialsCooldownTimer) clearInterval(commercialsCooldownTimer);
-      commercialsCooldownSeconds = 3;
-      updateOtherCommercialsButton();
-
-      commercialsCooldownTimer = setInterval(() => {
-        commercialsCooldownSeconds -= 1;
-        if (commercialsCooldownSeconds <= 0) {
-          commercialsCooldownSeconds = 0;
-          clearInterval(commercialsCooldownTimer);
-          commercialsCooldownTimer = null;
-        }
-        updateOtherCommercialsButton();
-      }, 1000);
-    }
-
-    renderCommercialSlot();
-    updateOtherCommercialsButton();
-    otherCommercialsBtn.addEventListener("click", () => {
-      if (otherCommercialsBtn.disabled) return;
-      refreshCommercialsHeader();
-      renderCommercialSlot();
-      startCommercialsCooldown();
-    });
   }
 
   const checkBtn = document.getElementById("checkBtn");

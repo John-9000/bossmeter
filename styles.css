@@ -165,9 +165,6 @@ body{
   justify-content:center;
 }
 
-.secondaryBtn{
-  margin-top: 8px;
-}
 
 .checkBtn:hover{ filter: brightness(1.06); transform: scale(1.02); }
 .checkBtn:active{ transform: scale(0.98); }
@@ -269,63 +266,9 @@ body{
 }
 .fineLink:hover{ color: rgba(255,255,255,0.92); }
 
-/* Ad box */
-.adBox{
-  margin-top: 10px;
-  min-height: 250px;
-  border-radius: 18px;
-  border: 1px solid rgba(51,65,85,1);
-  background: rgba(15,23,42,0.55);
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.adPlaceholder{
-  text-align:center;
-  padding: 18px;
-}
-.adLabel{
-  font-weight: 900;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-.adHint{
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-/* Back button on ads screen */
-.backBtn{
-  margin-top: 18px;
-  width: auto;
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.92);
-  font-weight: 900;
-  font-size: 18px;
-  cursor:pointer;
-  transition: transform .18s ease, filter .18s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.backBtn:hover{ filter: brightness(1.06); transform: scale(1.01); }
-.backBtn:active{ transform: scale(0.99); }
-
 @media (min-width: 520px){
   .card{ padding: 16px; }
   .title{ font-size: 23px; }
-}
-
-.card--ads{
-  padding-top: 14px;
-  padding-bottom: 14px;
 }
 
 /* Progress bar */
@@ -417,28 +360,9 @@ body{
 }
 
 a.checkBtn{ text-decoration:none; }
-.adsTitle{margin: 0 0 12px; font-size: clamp(20px, 6vw, 28px); text-align:center; color: var(--text); opacity: .9; }
 
 /* Shared link label */
 .bossFunny--shared{ color: rgba(148,163,184,0.92); }
-
-/* Fix orphan ::before / ::after artifacts on ads page */
-.card--ads *::before,
-.card--ads *::after{
-  content: none !important;
-}
-
-/* Fix AdSense left-edge placeholder artifact */
-.adBox ins.adsbygoogle{
-  display: block !important;
-  width: 100% !important;
-  min-height: 250px;
-}
-
-.adBox iframe{
-  display: block !important;
-  width: 100% !important;
-}
 
 /* Share button inside the result rectangle */
 .resultShareBtn{
@@ -680,20 +604,6 @@ a.checkBtn{ text-decoration:none; }
   text-align: center;
 }
 
-.adsSubtitle{
-  margin: 10px 0 12px;
-  text-align: center;
-  color: rgba(226,232,240,0.8);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.commercialsTopBar{
-  display: flex;
-  justify-content: flex-start;
-}
-
 .scoreBackBtn{
   display: inline-flex;
   align-items: center;
@@ -723,146 +633,6 @@ a.checkBtn{ text-decoration:none; }
   border-color: rgba(255,255,255,0.78);
   box-shadow: 0 16px 34px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08);
   backdrop-filter: blur(10px);
-}
-
-.commercialCard{
-  margin-top: 2px;
-}
-
-.commercialBadge{
-  margin-bottom: 8px;
-  color: rgba(226,232,240,0.72);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.commercialFrame{
-  min-height: 390px;
-  border-radius: 22px;
-  border: 1px solid rgba(74,93,127,0.72);
-  background: rgba(8,16,35,0.78);
-  padding: 12px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-}
-
-.commercialFrameInner{
-  min-height: 364px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.commercialFrameInner--adsense{
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-}
-
-.commercialAdsUnit{
-  width: 100% !important;
-  min-height: 280px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.02);
-}
-
-.fallbackCommercial{
-  width: 100%;
-  min-height: 280px;
-  border-radius: 16px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  background:
-    radial-gradient(circle at top left, rgba(96, 165, 250, 0.18), transparent 45%),
-    linear-gradient(180deg, rgba(15,23,42,0.92), rgba(12,18,31,0.96));
-  border: 1px solid rgba(96,165,250,0.24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.fallbackCommercialBadge{
-  color: rgba(191,219,254,0.9);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.fallbackCommercialTitle{
-  margin: 0;
-  color: rgba(248,250,252,0.98);
-  font-size: clamp(24px, 4vw, 30px);
-  line-height: 1.08;
-}
-
-.fallbackCommercialBody{
-  margin: 0;
-  color: rgba(226,232,240,0.84);
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.fallbackCommercialBtn{
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: rgba(96,165,250,0.16);
-  border: 1px solid rgba(147,197,253,0.4);
-  color: rgba(239,246,255,0.96);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.commercialActions{
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.commercialActions--underAd{
-  justify-content: center;
-  margin: 10px 0 14px;
-}
-
-.commercialActions--underAd .outlinePillBtn{
-  margin-left: 0;
-}
-
-.outlinePillBtn{
-  flex: 0 0 auto;
-  min-height: 42px;
-  padding: 0 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.7);
-  background: rgba(15,23,42,0.2);
-  color: rgba(226,232,240,0.96);
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.outlinePillBtn:hover{ filter: brightness(1.06); }
-.outlinePillBtn:active{ transform: scale(0.99); }
-.outlinePillBtn:disabled{
-  opacity: 0.72;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.appPromoCard--commercials{
-  margin-top: 12px;
 }
 
 .appPromoCard .checkBtn{
